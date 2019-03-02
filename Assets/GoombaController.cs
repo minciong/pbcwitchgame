@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GoombaController : MonoBehaviour {
-	protected Vector3 direction = Vector3.right;
+	protected Vector3 direction = -Vector3.right;
 	protected float movespeed = 2.5f;
+	protected float animationTimer = 0;
+	protected int scorevalue = 100;
 	// Use this for initialization
 	void Start () {
 		
@@ -16,6 +18,14 @@ public class GoombaController : MonoBehaviour {
 		if(WallDistance()<0.5f){
 			direction = -direction;
 		}
+		animationTimer += Time.deltaTime;
+		animationTimer %= 0.5f;
+		if(animationTimer <= 0.25f){
+			transform.localScale = new Vector3(-1,1,1);
+		}else{
+			transform.localScale = new Vector3(1,1,1);
+		}
+		
 	}
 	
 	float WallDistance () {
@@ -35,6 +45,7 @@ public class GoombaController : MonoBehaviour {
 		var player = c.collider.GetComponent<PlayerController>();
 		if(player != null){
 			if(player.transform.position.y >transform.position.y+1){
+				GameObject.Find("GameController").GetComponent<GameController>().UpdateScore(scorevalue);
 				Destroy(gameObject);
 			}
 			

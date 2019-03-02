@@ -6,6 +6,11 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
+    path: Assets/Scenes/MarioGameScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
-  m_configObjects: {}
+  - enabled: 1
+    path: Assets/Scenes/IntroScene.unity
+    guid: 31d8c0b08e6234b4cb5f79c99049bbe5
+  - enabled: 1
+    path: Assets/Scenes/GameOverScene.unity
+    guid: c29a3efa87865904c8dfecb774ed0b6d
