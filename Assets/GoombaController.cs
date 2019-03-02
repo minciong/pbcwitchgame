@@ -30,11 +30,18 @@ public class GoombaController : MonoBehaviour {
 		
 	}
 	
-	public void OnCollisionEnter (Collision c){
+	public void OnCollisionEnter2D (Collision2D c){
 		
 		var player = c.collider.GetComponent<PlayerController>();
 		if(player != null){
-			Destroy(player.gameObject);
+			if(player.transform.position.y >transform.position.y+1){
+				Destroy(gameObject);
+			}
+			
+			else{
+				//Destroy(player.gameObject);
+				player.OnKillPlayer();
+			}
 		}
 	}
 }

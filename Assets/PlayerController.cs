@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class PlayerController : MonoBehaviour {
 	protected float movespeed = 5f;
 	protected float jumpspeed = 10f;
@@ -37,5 +37,8 @@ public class PlayerController : MonoBehaviour {
 			return results[0].distance;
 		}
 		
+	}
+	public void OnKillPlayer(){
+		SceneManager.LoadScene("GameOverScene");
 	}
 }
