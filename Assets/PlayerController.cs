@@ -26,16 +26,16 @@ public class PlayerController : MonoBehaviour {
 		//Debug.Log("floordistance: "+ FloorDistance());
 		if(Input.GetKey(KeyCode.S)){
 			isDucking = true;
-		}else if(Input.GetKey(KeyCode.A) && transform.position.x >= Camera.main.transform.position.x - 6){
+		}else if(Input.GetAxis("Horizontal") < 0 && transform.position.x >= Camera.main.transform.position.x - 6){
 			isMoving = true;
 			transform.localScale = new Vector3(-1,1,1);
 			transform.position = transform.position - Vector3.right * Time.deltaTime * movespeed;
-		}else if(Input.GetKey(KeyCode.D)){
+		}else if(Input.GetAxis("Horizontal") > 0){
 			isMoving = true;
 			transform.localScale = new Vector3(1,1,1);
 			transform.position = transform.position + Vector3.right * Time.deltaTime * movespeed;
 		}
-		if(Input.GetKeyDown(KeyCode.W) && FloorDistance() < 1.2f){
+		if(Input.GetButtonDown("Jump") && FloorDistance() < 1.2f){
 			GetComponent<Rigidbody2D>().velocity = new Vector2(0,jumpspeed);
 			
 		}
