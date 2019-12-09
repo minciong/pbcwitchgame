@@ -14,7 +14,7 @@ public class GameController : MonoBehaviour {
 	void Update () {
 		var v3 = Input.mousePosition;
 		v3 = Camera.main.ScreenToWorldPoint(v3);
-		Debug.Log(v3);
+// 		Debug.Log(v3);
 		scoreText.text = "Score: " + score;
 	}
 	public void UpdateScore(int value){

@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 public class PlayerController : MonoBehaviour {
 	protected float movespeed = 5f;
 	protected float jumpspeed = 10f;
+    protected float velocity = 0f;
 	protected Sprite[] movesprites;
 	protected Sprite standsprite;
 	protected Sprite jumpsprite;
@@ -26,19 +27,20 @@ public class PlayerController : MonoBehaviour {
 		//Debug.Log("floordistance: "+ FloorDistance());
 		if(Input.GetKey(KeyCode.S)){
 			isDucking = true;
-		}else if(Input.GetKey(KeyCode.A) && transform.position.x >= Camera.main.transform.position.x - 6){
+		}else if(Input.GetButton("Left") && transform.position.x >= Camera.main.transform.position.x - 6){
 			isMoving = true;
 			transform.localScale = new Vector3(-1,1,1);
-			transform.position = transform.position - Vector3.right * Time.deltaTime * movespeed;
-		}else if(Input.GetKey(KeyCode.D)){
+            if (velocity <= 5){ velocity -= 0.04f; }
+		}else if(Input.GetButton("Right")){
 			isMoving = true;
+            if (velocity <= 5){ velocity += 0.04f; }
 			transform.localScale = new Vector3(1,1,1);
-			transform.position = transform.position + Vector3.right * Time.deltaTime * movespeed;
 		}
-		if(Input.GetKeyDown(KeyCode.W) && FloorDistance() < 1.2f){
+		if(Input.GetButton("Jump") && FloorDistance() < 1.2f){
 			GetComponent<Rigidbody2D>().velocity = new Vector2(0,jumpspeed);
 			
 		}
+				
 		if(isDucking){
 			GetComponent<SpriteRenderer>().sprite = ducksprite;
 		}else if(FloorDistance() >= 1.2f){
@@ -47,9 +49,20 @@ public class PlayerController : MonoBehaviour {
 			animationTimer += Time.deltaTime;
 			animationTimer %= 0.3f;
 			GetComponent<SpriteRenderer>().sprite = movesprites[(int)(animationTimer/0.1f)];
-		}else{
+		}
+		else{
+            if (velocity > 2)
+                velocity -= 0.06f;
+            else if ((velocity < 2 && velocity > 0) || (velocity > -2 && velocity < 0))
+                velocity = 0;
+            else if (velocity < 0)
+                velocity += 0.06f;
+            
 			GetComponent<SpriteRenderer>().sprite = standsprite;
 		}
+		
+        transform.position = transform.position + new Vector3(velocity, 0, 0) * Time.deltaTime;
+
 		
 	}
 	float FloorDistance () {
