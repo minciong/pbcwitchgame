@@ -3,9 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 public class PlayerController : MonoBehaviour {
-	protected float movespeed = 5f;
-	protected float jumpspeed = 10f;
-    protected float velocity = 0f;
+	protected float jumpSpeed = 10f;
+    protected float xVel = 0f; //stores horizontal current velocity
+    protected float accel = 0.04f; //value of increased speed for chosen direction
+    protected float xStopRate = 0.1f; //rate to slow down at when not inputting
+    protected float xStopRange = 2f; //how close to this value in or der to full stop
+    protected float xMaxVel = 4f; //maximum x velocity allowed
+    protected float sprintMult = 1.5f; //sprint multiplier
+    protected float sprintVal = 1f; //how much sprint currently
+    protected float yVel = 0f; //y velocity
+    protected float duckRate = 0.1f; //negative y velocity from ducking mid-air
 	protected Sprite[] movesprites;
 	protected Sprite standsprite;
 	protected Sprite jumpsprite;
@@ -25,43 +32,57 @@ public class PlayerController : MonoBehaviour {
 		var isMoving = false;
 		var isDucking = false;
 		//Debug.Log("floordistance: "+ FloorDistance());
-		if(Input.GetKey(KeyCode.S)){
+		if(Input.GetButton("Down")){
 			isDucking = true;
-		}else if(Input.GetButton("Left") && transform.position.x >= Camera.main.transform.position.x - 6){
+            yVel -= duckRate;
+            
+		}
+        if(Input.GetButtonDown("Sprint")){
+			sprintVal = sprintMult;
+            xMaxVel += 2;
+        }
+        else if(Input.GetButtonUp("Sprint")){
+			sprintVal = 1;
+            xMaxVel -= 2;
+        }
+        if(Input.GetButton("Left") && transform.position.x >= Camera.main.transform.position.x - 6){
 			isMoving = true;
 			transform.localScale = new Vector3(-1,1,1);
-            if (velocity <= 5){ velocity -= 0.04f; }
-		}else if(Input.GetButton("Right")){
+            if (xVel >= (xMaxVel * -1)){ xVel -= accel; }
+		}
+		if(Input.GetButton("Right")){
 			isMoving = true;
-            if (velocity <= 5){ velocity += 0.04f; }
+            if (xVel <= xMaxVel){ xVel += accel; } 
 			transform.localScale = new Vector3(1,1,1);
 		}
 		if(Input.GetButton("Jump") && FloorDistance() < 1.2f){
-			GetComponent<Rigidbody2D>().velocity = new Vector2(0,jumpspeed);
+			GetComponent<Rigidbody2D>().velocity = new Vector2(0,jumpSpeed);
 			
 		}
 				
 		if(isDucking){
 			GetComponent<SpriteRenderer>().sprite = ducksprite;
+            yVel -= duckRate;
 		}else if(FloorDistance() >= 1.2f){
 			GetComponent<SpriteRenderer>().sprite = jumpsprite;
-		}else if(isMoving){
+        }if(FloorDistance() >= 0.05){
+			yVel = 0;
+		}if(isMoving){
 			animationTimer += Time.deltaTime;
 			animationTimer %= 0.3f;
 			GetComponent<SpriteRenderer>().sprite = movesprites[(int)(animationTimer/0.1f)];
 		}
 		else{
-            if (velocity > 2)
-                velocity -= 0.06f;
-            else if ((velocity < 2 && velocity > 0) || (velocity > -2 && velocity < 0))
-                velocity = 0;
-            else if (velocity < 0)
-                velocity += 0.06f;
+            if (xVel > xStopRange) //if we've got positive xVel, slow down
+                xVel -= xStopRate;
+            else if ((xVel < xStopRange && xVel > 0) || (xVel > (xStopRange * -1) && xVel < 0)) //if we're close enough to stop, stop
+                xVel = 0; 
+            else if (xVel < 0) //if negative xVel, increase
+                xVel += xStopRate;
             
 			GetComponent<SpriteRenderer>().sprite = standsprite;
 		}
-		
-        transform.position = transform.position + new Vector3(velocity, 0, 0) * Time.deltaTime;
+        transform.position = transform.position + (new Vector3(xVel, yVel, 0) * sprintVal) * Time.deltaTime;
 
 		
 	}
