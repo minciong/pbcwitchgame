@@ -12,6 +12,8 @@ public class FamiliarController : MonoBehaviour
     public float RotateSpeed = 10f;
     public float accelerate = 0;
     public float maxspeed = 1000f;
+    public bool teleport_cd = false;
+    public int teleport_cd_duration = 0;
 
     // private Vector2 _centre;
     public float _angle;
@@ -50,7 +52,7 @@ public class FamiliarController : MonoBehaviour
 
         // Debug.Log(witch_character.gameObject.transform.position);
         // Debug.Log(distance);
-        if (Input.GetKeyDown(KeyCode.LeftShift) && !teleported)
+        if (Input.GetKeyDown(KeyCode.LeftShift) && !teleported && !teleport_cd)
         {
             var temp = witchPos;
             Vector3 targetDir = witch_character.position - transform.position;
@@ -58,8 +60,9 @@ public class FamiliarController : MonoBehaviour
             witch_character.position = transform.position;
             transform.position = temp;
             teleported = true;
+            teleport_cd = true;
         }
-        if(teleported)
+        if (teleported)
         {
             // LINEAR TRANSFORM
             // if (accelerate < maxspeed) { accelerate += Time.deltaTime / 10; }
@@ -70,8 +73,6 @@ public class FamiliarController : MonoBehaviour
             if(accelerate < maxspeed){ accelerate += 2; }
             var offset = new Vector3(Mathf.Sin(_angle), Mathf.Cos(_angle), 0) * radius;
             transform.position = witch_character.position + offset;
-
-
             var difference = transform.position - new_pos;
             if (Mathf.Abs(difference.x) + Mathf.Abs(difference.y) < 1)
             {
@@ -83,5 +84,9 @@ public class FamiliarController : MonoBehaviour
             transform.position = new_pos;
             accelerate = 0;
         }
+        if (teleport_cd_duration < 350 && teleport_cd) { teleport_cd_duration += 1; }
+        else { teleport_cd = false; teleport_cd_duration = 0; }
+
+
     }
 }
