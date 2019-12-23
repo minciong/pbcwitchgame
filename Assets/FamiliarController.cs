@@ -10,7 +10,9 @@ public class FamiliarController : MonoBehaviour
     public Transform witch_character; // Witch Object
     // ROTATE PROPERTY OF TELEPORT
     // https://answers.unity.com/questions/1164022/move-a-2d-item-in-a-circle-around-a-fixed-point.html
-    public float RotateSpeed = 5f;
+    public float RotateSpeed = 10f;
+    public float accelerate = 0;
+    public float maxspeed = 1000f;
 
     // private Vector2 _centre;
     public float _angle;
@@ -51,7 +53,8 @@ public class FamiliarController : MonoBehaviour
             // t += Time.deltaTime / 10;
             // transform.position = Vector3.Lerp(transform.position, new_pos, t);
             // ANGULAR TRANSFORM
-            _angle += RotateSpeed * Time.deltaTime*2;
+            _angle += RotateSpeed * Time.deltaTime*(accelerate/55);
+            if(accelerate < maxspeed){ accelerate += 2; }
             var offset = new Vector3(Mathf.Sin(_angle), Mathf.Cos(_angle), 0) * radius;
             transform.position = witch_character.position + offset;
             var difference = transform.position - new_pos;
@@ -63,6 +66,7 @@ public class FamiliarController : MonoBehaviour
         else
         {
             transform.position = new_pos;
+            accelerate = 0;
             // t = 0;
         }
     }
