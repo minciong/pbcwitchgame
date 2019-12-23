@@ -6,7 +6,6 @@ public class FamiliarController : MonoBehaviour
 {
     protected float radius=3;
     public bool teleported = false;
-    public float t;
     public Transform witch_character; // Witch Object
     // ROTATE PROPERTY OF TELEPORT
     // https://answers.unity.com/questions/1164022/move-a-2d-item-in-a-circle-around-a-fixed-point.html
@@ -34,8 +33,21 @@ public class FamiliarController : MonoBehaviour
         var witchPos = witch_character.gameObject.transform.position;
         var mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         var direction = new Vector3(mouse.x, mouse.y, 0) - witchPos;
+        //LINEAR TRANSFORM
+        /*
+        Vector3 new_pos;
+        if (Mathf.Abs(direction.x) + Mathf.Abs(direction.y) > radius){
+            new_pos = witchPos + Vector3.Normalize(direction) * radius;
+        }
+        else
+        {
+            new_pos = witchPos + direction;
+        }
+        */
+        //ROTATIONAL TRANSFORM
         var new_pos = witchPos + Vector3.Normalize(direction) * radius;
- 
+
+
         // Debug.Log(witch_character.gameObject.transform.position);
         // Debug.Log(distance);
         if (Input.GetKeyDown(KeyCode.LeftShift) && !teleported)
@@ -50,13 +62,16 @@ public class FamiliarController : MonoBehaviour
         if(teleported)
         {
             // LINEAR TRANSFORM
-            // t += Time.deltaTime / 10;
-            // transform.position = Vector3.Lerp(transform.position, new_pos, t);
+            // if (accelerate < maxspeed) { accelerate += Time.deltaTime / 10; }
+            // transform.position = Vector3.Lerp(transform.position, new_pos, accelerate);
+
             // ANGULAR TRANSFORM
-            _angle += RotateSpeed * Time.deltaTime*(accelerate/55);
+            _angle += RotateSpeed * Time.deltaTime*(accelerate/50);
             if(accelerate < maxspeed){ accelerate += 2; }
             var offset = new Vector3(Mathf.Sin(_angle), Mathf.Cos(_angle), 0) * radius;
             transform.position = witch_character.position + offset;
+
+
             var difference = transform.position - new_pos;
             if (Mathf.Abs(difference.x) + Mathf.Abs(difference.y) < 1)
             {
@@ -67,7 +82,6 @@ public class FamiliarController : MonoBehaviour
         {
             transform.position = new_pos;
             accelerate = 0;
-            // t = 0;
         }
     }
 }
