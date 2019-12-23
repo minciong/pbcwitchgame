@@ -5,25 +5,65 @@ using UnityEngine;
 public class FamiliarController : MonoBehaviour
 {
     protected float radius=3;
+    public bool teleported = false;
+    public float t;
+    public Transform witch_character; // Witch Object
+    // ROTATE PROPERTY OF TELEPORT
+    // https://answers.unity.com/questions/1164022/move-a-2d-item-in-a-circle-around-a-fixed-point.html
+    public float RotateSpeed = 5f;
+
+    // private Vector2 _centre;
+    public float _angle;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
+
         Camera camera = GetComponent<Camera>();
-        float distance = Vector3.Distance(transform.position, transform.parent.gameObject.transform.position);
+        float distance = Vector3.Distance(transform.position, witch_character.gameObject.transform.position);
         // angle = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         // Debug.Log(transform.position);
-        var witchPos = transform.parent.gameObject.transform.position;
+        var witchPos = witch_character.gameObject.transform.position;
         var mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        
-        var direction = new Vector3(mouse.x, mouse.y, 0)-witchPos;
-        transform.position = witchPos+Vector3.Normalize(direction)*radius;
-        // Debug.Log(transform.parent.gameObject.transform.position);
+        var direction = new Vector3(mouse.x, mouse.y, 0) - witchPos;
+        var new_pos = witchPos + Vector3.Normalize(direction) * radius;
+ 
+        // Debug.Log(witch_character.gameObject.transform.position);
         // Debug.Log(distance);
+        if (Input.GetKeyDown(KeyCode.LeftShift) && !teleported)
+        {
+            var temp = witchPos;
+            Vector3 targetDir = witch_character.position - transform.position;
+            _angle = (Vector3.SignedAngle(targetDir, transform.up, transform.forward)/180) * 3.14f;
+            witch_character.position = transform.position;
+            transform.position = temp;
+            teleported = true;
+        }
+        if(teleported)
+        {
+            // LINEAR TRANSFORM
+            // t += Time.deltaTime / 10;
+            // transform.position = Vector3.Lerp(transform.position, new_pos, t);
+            // ANGULAR TRANSFORM
+            _angle += RotateSpeed * Time.deltaTime*2;
+            var offset = new Vector3(Mathf.Sin(_angle), Mathf.Cos(_angle), 0) * radius;
+            transform.position = witch_character.position + offset;
+            var difference = transform.position - new_pos;
+            if (Mathf.Abs(difference.x) + Mathf.Abs(difference.y) < 1)
+            {
+                teleported = false;
+            }
+        }
+        else
+        {
+            transform.position = new_pos;
+            // t = 0;
+        }
     }
 }
