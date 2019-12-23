@@ -11,11 +11,11 @@ public class CameraController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
-		if(followTarget.transform.position.x > transform.position.x){
+
+        // if (followTarget.transform.position.x > transform.position.x){
 			var position = transform.position;
 			position.x = followTarget.transform.position.x;
 			transform.position = position;
-		}
+		//}
 	}
 }
