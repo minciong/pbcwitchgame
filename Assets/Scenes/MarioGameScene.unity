@@ -2395,6 +2395,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98684ba4fa080764bbec2f016b96a1fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  teleported: 0
+  witch_character: {fileID: 1287838255}
+  RotateSpeed: 10
+  accelerate: 0
+  accelerate_step: 16
+  maxspeed: 1000
+  teleport_cd: 0
+  teleport_cd_duration: 0
+  _angle: 0
 --- !u!212 &1798255921
 SpriteRenderer:
   m_ObjectHideFlags: 0

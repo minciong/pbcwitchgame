@@ -11,7 +11,8 @@ public class FamiliarController : MonoBehaviour
     // https://answers.unity.com/questions/1164022/move-a-2d-item-in-a-circle-around-a-fixed-point.html
     public float RotateSpeed = 10f;
     public float accelerate = 0;
-    public float maxspeed = 1000f;
+    public float accelerate_step = 12;
+    public float maxspeed = 2000f;
     public bool teleport_cd = false;
     public int teleport_cd_duration = 0;
 
@@ -56,7 +57,7 @@ public class FamiliarController : MonoBehaviour
         {
             var temp = witchPos;
             Vector3 targetDir = witch_character.position - transform.position;
-            _angle = (Vector3.SignedAngle(targetDir, transform.up, transform.forward)/180) * 3.14f;
+            _angle = (Vector3.SignedAngle(targetDir, transform.up, transform.forward)/180) * Mathf.PI;
             witch_character.position = transform.position;
             transform.position = temp;
             teleported = true;
@@ -69,11 +70,12 @@ public class FamiliarController : MonoBehaviour
             // transform.position = Vector3.Lerp(transform.position, new_pos, accelerate);
 
             // ANGULAR TRANSFORM
-            _angle += RotateSpeed * Time.deltaTime*(accelerate/50);
-            if(accelerate < maxspeed){ accelerate += 2; }
+            _angle += RotateSpeed * Time.deltaTime*(accelerate/100);
+            if(accelerate < maxspeed){ accelerate += accelerate_step; }
             var offset = new Vector3(Mathf.Sin(_angle), Mathf.Cos(_angle), 0) * radius;
             transform.position = witch_character.position + offset;
             var difference = transform.position - new_pos;
+            
             if (Mathf.Abs(difference.x) + Mathf.Abs(difference.y) < 1)
             {
                 teleported = false;
@@ -84,7 +86,7 @@ public class FamiliarController : MonoBehaviour
             transform.position = new_pos;
             accelerate = 0;
         }
-        if (teleport_cd_duration < 350 && teleport_cd) { teleport_cd_duration += 1; }
+        if (teleport_cd_duration < 50 && teleport_cd) { teleport_cd_duration += 1; }
         else { teleport_cd = false; teleport_cd_duration = 0; }
 
 
