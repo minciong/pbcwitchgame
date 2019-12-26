@@ -237,7 +237,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 28513027}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 2671bd7f465b89f47870522eee65a08b, type: 3}
@@ -1960,8 +1960,8 @@ GameObject:
   - component: {fileID: 1287838255}
   - component: {fileID: 1287838254}
   - component: {fileID: 1287838257}
-  - component: {fileID: 1287838256}
   - component: {fileID: 1287838258}
+  - component: {fileID: 1287838259}
   m_Layer: 0
   m_Name: mario_stand
   m_TagString: Player
@@ -2060,6 +2060,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 2}
   m_EdgeRadius: 0
+
 --- !u!50 &1287838257
 Rigidbody2D:
   serializedVersion: 4
@@ -2093,6 +2094,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df8d4636dcc427b4a8b1cd372e07ba7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!70 &1287838259
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1287838253}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 1, y: 2}
+  m_Direction: 0
 --- !u!1 &1417991896
 GameObject:
   m_ObjectHideFlags: 0
@@ -2390,6 +2407,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1798255917}
+<<<<<<< HEAD
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 98684ba4fa080764bbec2f016b96a1fa, type: 3}
@@ -2454,3 +2472,14 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+=======
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 4
+>>>>>>> 7a959b814bccc77ac6c47cf8da735353915baf1d
