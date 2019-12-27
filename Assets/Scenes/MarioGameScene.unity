@@ -2080,7 +2080,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 2
+  m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
   m_Material: {fileID: 6200000, guid: 183f4dccfeab45f7a87ca706c9a88398, type: 2}
@@ -2101,8 +2101,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpSpeed: 100
-  accel: 7
-  xMaxVel: 10
+  accel: 6
+  xMaxVel: 7
   sprintMult: 1.5
   sprintVal: 1
   duckRate: 10

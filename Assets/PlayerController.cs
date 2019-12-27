@@ -6,9 +6,9 @@ using UnityEngine.SceneManagement;
 public class PlayerController : MonoBehaviour {
 	private SpriteRenderer playerSpriteRenderer;
 	private Rigidbody2D playerBody;
-	public float jumpSpeed = 60f;
-	public float accel = 5f; //value of increased speed for chosen direction
-	public float xMaxVel = 6f; //maximum x velocity allowed
+	public float jumpSpeed = 100f;
+	public float accel = 6f; //value of increased speed for chosen direction
+	public float xMaxVel = 7f; //maximum x velocity allowed
 	public float sprintMult = 1.5f; //sprint multiplier
 	public float sprintVal = 1f; //how much sprint currently
 	public float duckRate = 10f; //negative y velocity from ducking mid-air
