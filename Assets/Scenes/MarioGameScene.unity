@@ -2100,12 +2100,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df8d4636dcc427b4a8b1cd372e07ba7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpSpeed: 100
-  accel: 6
-  xMaxVel: 7
+  jumpSpeed: 200
+  accel: 12
+  xMaxVel: 8
   sprintMult: 1.5
   sprintVal: 1
-  duckRate: 10
+  duckRate: 20
   animationTimer: 0
 --- !u!70 &1287838259
 CapsuleCollider2D:
