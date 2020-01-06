@@ -16,6 +16,7 @@ public class FamiliarController : MonoBehaviour
     public bool teleport_cd = false;
     public bool rotate = false;
     public int teleport_cd_duration = 0;
+    protected bool teleportOverride = false; //prevents teleports if true
 
     // private Vector2 _centre;
     public float _angle;
@@ -26,9 +27,18 @@ public class FamiliarController : MonoBehaviour
 
     }
 
+
+   void OnCollisionEnter2D(Collision2D collision){
+    Debug.Log(collision.otherCollider.name);
+    if (collision.otherCollider.name == "TerrainTilemap"){
+      teleportOverride = true;
+    }
+   }
+
     // Update is called once per frame
     void Update()
     {
+      teleportOverride = false;
 
       if (Input.GetButton("familiarSwap"))
         rotate = !rotate;
@@ -61,7 +71,7 @@ public class FamiliarController : MonoBehaviour
 
       // Debug.Log(witch_character.gameObject.transform.position);
       // Debug.Log(distance);
-      if (Input.GetButtonDown("Teleport") && !teleported && !teleport_cd)
+      if (Input.GetButtonDown("Teleport") && !teleported && !teleport_cd && !teleportOverride)
       {
           var temp = witchPos;
           Vector3 targetDir = witch_character.position - transform.position;
@@ -100,7 +110,6 @@ public class FamiliarController : MonoBehaviour
       }
       if (teleport_cd_duration < 50 && teleport_cd) { teleport_cd_duration += 1; }
       else { teleport_cd = false; teleport_cd_duration = 0; }
-
-
   }
+
 }

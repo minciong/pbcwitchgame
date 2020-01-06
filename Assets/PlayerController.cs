@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PlayerController : MonoBehaviour {
+public class PlayerController : GenericController {
 	protected private SpriteRenderer playerSpriteRenderer;
 	protected private Rigidbody2D playerBody;
 	public float jumpSpeed = 200f;
-	public float accel = 12f; //value of increased speed for chosen direction
+	public float accel = 20f; //value of increased speed for chosen direction
 	public float xMaxVel = 8f; //maximum x velocity allowed
 	public float sprintMult = 1.5f; //sprint multiplier
 	public float sprintVal = 1f; //how much sprint currently
@@ -53,7 +53,7 @@ public class PlayerController : MonoBehaviour {
 
 		}
 
-		if (Input.GetButton("Jump") && FloorDistance() < 1.2f){
+		if (Input.GetButton("Jump") && TerrainDistance(true) < 1.2f){
 			yForce = jumpSpeed;
 		}
 
@@ -97,7 +97,7 @@ public class PlayerController : MonoBehaviour {
 			playerSpriteRenderer.sprite = duckSprite;
 		}
 
-		else if (FloorDistance() >= 1.1f){ //if we're in the air, apply the jumping sprite
+		else if (TerrainDistance(true) >= 1.1f){ //if we're in the air, apply the jumping sprite
 			playerSpriteRenderer.sprite = jumpSprite;
 		}
 
@@ -115,17 +115,6 @@ public class PlayerController : MonoBehaviour {
 
 	}
 
-	float FloorDistance () {
-		var results = new RaycastHit2D[1];
-		var count = GetComponent<CapsuleCollider2D>().Raycast(-Vector2.up, results);
-		if(count < 1){
-			return 1000;
-		}
-		else{
-			return results[0].distance;
-		}
-
-	}
 	public void OnKillPlayer(){
 		SceneManager.LoadScene("GameOverScene");
 	}
