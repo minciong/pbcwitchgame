@@ -19,8 +19,8 @@ public class KillPlaneScript : MonoBehaviour {
 		// if(player != null){
 		//	player.OnKillPlayer();
 		// }
-		if(c.tag == "Player"){
-			player.OnKillPlayer();
-		}
+		// if(c.tag == "Player"){
+		// 	player.OnKillPlayer();
+		// }
 	}
 }
