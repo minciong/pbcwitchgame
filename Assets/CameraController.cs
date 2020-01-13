@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour {
 	public Transform followTarget;
-	public float cameraSpeed = 0.125f;
-	public float sprintCameraSpeed = 1;
-	public Vector3 offset;
+	public float cameraSpeed = 5f;
+	public float sprintCameraSpeed = 5f;
+	public Vector3 offset = new Vector3(0, 2, -1);
 	public float zoomIn = 7.0f; //camera when zoomed in during sprin
  	public float zoomOut = 9.0f; //camera default
-	public float targetOrtho = 1.0f;
+	public float targetOrtho = 9.0f;
 
 	// Use this for initialization
 	void Start () {
