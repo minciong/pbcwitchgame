@@ -29,16 +29,20 @@ public class FamiliarController : MonoBehaviour
 
 
    void OnCollisionEnter2D(Collision2D collision){
-    Debug.Log(collision.otherCollider.name);
-    if (collision.otherCollider.name == "TerrainTilemap"){
+    if (collision.collider.name == "TerrainTilemap"){ //when we collide with the tilemap, no teleports
       teleportOverride = true;
     }
+   }
+
+   void OnCollisionExit2D(Collision2D collision){
+     if (collision.collider.name == "TerrainTilemap"){ //stopped colliding with the tilemap, teleport allowed
+       teleportOverride = false;
+     }
    }
 
     // Update is called once per frame
     void Update()
     {
-      teleportOverride = false;
 
       if (Input.GetButton("familiarSwap"))
         rotate = !rotate;

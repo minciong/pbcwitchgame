@@ -6,16 +6,16 @@ using UnityEngine.SceneManagement;
 public class PlayerController : GenericController {
 	protected private SpriteRenderer playerSpriteRenderer;
 	protected private Rigidbody2D playerBody;
-	public float jumpSpeed = 5f;
-	public float speed =0;
-	public float accel = 1f; //value of increased speed for chosen direction
-	public float decel = 5f; //value of decreased speed for chosen direction
+	public float jumpForce = 13f;
+	protected float xVelocity = 0;
+	public float accel = 30f; //value of increased speed for chosen direction
+	public float decel = 30f; //value of decreased speed for chosen direction
 	public float xMaxVel = 10f; //maximum x velocity allowed
 	public float sprintMult = 1.5f; //sprint multiplier
 	public float sprintVal = 1f; //how much sprint currently
-	public float duckRate = 20f; //negative y velocity from ducking mid-air
+	public float duckRate = 0.05f; //negative y velocity from ducking mid-air
 	public float animationTimer = 0;
-	public float jumpTime=0;
+	public float jumpTime = 0;
 	protected bool isJumping;
 	protected float jumpTimeCounter;
 	protected Sprite[] moveSprites;
@@ -34,76 +34,64 @@ public class PlayerController : GenericController {
 	}
 
 	//FixedUpdate works independent of frame rate, for interaction with the physics system
-	void FixedUpdate () {
-
-		// var xForce = 0f; //these are to be appied to the playerBody before the function ends
-		// var duckRate=0
-		// var yForce=0f;
-		// var duckVal=0f;
-
-		
-
-		// playerBody.AddForce(new Vector2( 0, yForce + duckVal) ); //apply all force as caluclated above
-		// duckVal = 0f;
-	}
+	// void FixedUpdate () {
+	// }
 
 	// Update is called once per frame
 	void Update () {
-		var yForce = 0f;
-		var duckVal = 0f;
-		
 		var isMoving = false;
 		var isDucking = false;
 		if(Input.GetButton("Down")){
-			playerBody.velocity+=Vector2.down;//Increases falling speed
-			// duckVal -= duckRate;
-			// yForce = (-1)*duckRate; //add some negative force when trying to go down
+			playerBody.velocity += duckRate * Vector2.down; //Increases falling speed
 		}
 		// Initial Jump
 		if (Input.GetButtonDown("Jump") && TerrainDistance(true) < 1.2f){
-			isJumping=true;
- 			playerBody.velocity = Vector2.up*jumpSpeed;
- 			jumpTimeCounter=jumpTime;
+			isJumping = true;
+ 			playerBody.velocity = Vector2.up * jumpForce;
+ 			jumpTimeCounter = jumpTime;
 		}
 		// jump higher while held
 		if (Input.GetButton("Jump") && isJumping){
-			if(jumpTimeCounter>0){
+			if(jumpTimeCounter > 0){
 
-			 	playerBody.velocity = Vector2.up*jumpSpeed;
-			 	jumpTimeCounter-=Time.deltaTime;
+			 	playerBody.velocity = Vector2.up * jumpForce;
+			 	jumpTimeCounter -= Time.deltaTime;
 			}
 			else{
-				isJumping=false;
+				isJumping = false;
 			}
 		}
 		// Jump not being held
 		if (Input.GetButtonUp("Jump")){
-			isJumping=false;
+			isJumping = false;
 		}
 		// Acceleration
-		if(Input.GetButtonDown("Sprint")){
+		if (Input.GetButtonDown("Sprint")){
 			sprintVal = sprintMult;
-			xMaxVel *= 1.5f;
+			xMaxVel *= sprintMult;
 		}
-		if(Input.GetButtonUp("Sprint")){
+
+		if (Input.GetButtonUp("Sprint")){
 			sprintVal = 1;
-			xMaxVel /= 1.5f;
+			xMaxVel /= sprintMult;
 		}
-		if ((Input.GetButton("Left"))&&(speed > -xMaxVel))
-		    speed = speed - accel*Time.deltaTime;
-		else if ((Input.GetButton("Right"))&&(speed < xMaxVel))
-		    speed = speed + accel*Time.deltaTime;
+		if ((Input.GetButton("Left"))&&(xVelocity > -xMaxVel))
+		    xVelocity = xVelocity - accel * Time.deltaTime;
+
+		else if ((Input.GetButton("Right"))&&(xVelocity < xMaxVel))
+		    xVelocity = xVelocity + accel * Time.deltaTime;
 		else
 		{
-		    if(speed > decel * Time.deltaTime)
-		        speed = speed - decel*Time.deltaTime;
-		    else if(speed < -decel * Time.deltaTime)
-		        speed = speed + decel*Time.deltaTime;
+		    if (xVelocity > decel * Time.deltaTime)
+		        xVelocity = xVelocity - decel * Time.deltaTime;
+		    else if (xVelocity < -decel * Time.deltaTime)
+		        xVelocity = xVelocity + decel * Time.deltaTime;
 		    else
-		        speed = 0;
+		        xVelocity = 0;
 		}
-		transform.position = transform.position + Vector3.right*speed * Time.deltaTime;
-		
+
+		transform.position = transform.position + Vector3.right * xVelocity * Time.deltaTime;
+
 
 		//BEGIN: sprite logic
 
