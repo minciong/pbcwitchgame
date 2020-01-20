@@ -1,3 +1,6 @@
+.vs
+.vscode
+
 *.sln
 *.csproj
 Temp

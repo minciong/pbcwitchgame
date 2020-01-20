@@ -583,6 +583,7 @@ GameObject:
   - component: {fileID: 550068030}
   - component: {fileID: 550068029}
   - component: {fileID: 550068028}
+  - component: {fileID: 550068031}
   m_Layer: 8
   m_Name: TerrainTilemap
   m_TagString: Terrain
@@ -1969,6 +1970,27 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!50 &550068031
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 550068026}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 0.0001
+  m_LinearDrag: 0
+  m_AngularDrag: 0
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 7
 --- !u!1 &833878659
 GameObject:
   m_ObjectHideFlags: 0
@@ -2272,14 +2294,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df8d4636dcc427b4a8b1cd372e07ba7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpSpeed: 13
-  speed: 0
+  jumpForce: 13
   accel: 30
   decel: 30
-  xMaxVel: 10
+  xMaxVel: 8
   sprintMult: 1.5
   sprintVal: 1
-  duckRate: 20
+  duckRate: 0.7
   animationTimer: 0
   jumpTime: 0.3
 --- !u!70 &1287838259
