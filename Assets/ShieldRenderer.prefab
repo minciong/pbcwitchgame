@@ -80,13 +80,22 @@ TrailRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 1
+        value: 0.2
         inSlope: -0.060210545
         outSlope: -0.060210545
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.3991228
+      - serializedVersion: 3
+        time: 0.1
+        value: 0.5
+        inSlope: -0.24972492
+        outSlope: -0.24972492
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
       - serializedVersion: 3
         time: 1
         value: 0
@@ -101,7 +110,7 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.67, g: 1, b: 0.18, a: 0.9}
+      key0: {r: 0.3, g: 0.73, b: 0.09, a: 0.9}
       key1: {r: 0, g: 0.26, b: 0.17, a: 0.8}
       key2: {r: 0, g: 0.16, b: 0.1, a: 0.7}
       key3: {r: 0, g: 0, b: 0, a: 0.5}
