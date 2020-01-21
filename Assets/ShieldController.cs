@@ -10,7 +10,9 @@ public class ShieldController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+     
       trail = GetComponent<TrailRenderer>();
+     
     }
 
     // Update is called once per frame
