@@ -8,7 +8,7 @@ public class ShieldController : MonoBehaviour
     public EdgeCollider2D edgeCollider; //the edgecollider
     public TrailRenderer trail; //our trail renderer (shieldRenderer)
     const int MAX_POSITIONS = 100;
-    protected Vector3[] trailPoints = new Vector3[MAX_POSITIONS];
+    protected Vector3[] trailPoints;
     protected Vector2 startLocation; //stores drawing start position
 
     // Start is called before the first frame update
@@ -17,25 +17,32 @@ public class ShieldController : MonoBehaviour
       edgeCollider = GetComponent<EdgeCollider2D>(); //get the edge collider, build into correct shape
       trail = GetComponent<TrailRenderer>();
       trailFollower = this.transform.parent; //get the familiar
-      Vector2 startLocation = trailFollower.transform.position;
+      startLocation = trailFollower.transform.position; //needed to fix offset issues later
       edgeCollider.enabled = false; //avoid colliding with anything until drawn
     }
 
     // Update is called once per frame
     void Update(){
       if (Input.GetButtonUp("DrawShield")){
-        trail.emitting = false;
-        int trailPointsNum = trail.GetPositions(trailPoints); //get actual number of points and populate array
-        Vector2[] v2 = new Vector2[trailPointsNum];
+        int trailPointNum = trail.positionCount;
+        trailPoints = new Vector3[trailPointNum];
+        trail.GetPositions(trailPoints); //populate array
+        Vector2[] edgePoints = new Vector2[trailPointNum];
         int i = 0;
         foreach (Vector3 point in trailPoints){ //convert v3 array to v2 array
-          if (i == trailPointsNum){break;} //if we've filled our array
-          v2[i] = point;
+          Debug.Log(point);
+          edgePoints[i] = point;
           i++;
         }
         edgeCollider.enabled = true;
-        this.transform.position = startLocation;
-        edgeCollider.points = v2;
+        edgeCollider.offset = -this.transform.position; //fixes offset to origin issue
+        edgeCollider.points = edgePoints;
       }
     }
+    void OnCollisionEnter2D(Collision2D collision){
+
+    if (collision.gameObject.tag == "Player"){ //ignore player collision entirely
+      Physics2D.IgnoreCollision(collision.collider, edgeCollider);
+    }
+   }
 }
