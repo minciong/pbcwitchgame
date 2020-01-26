@@ -2091,6 +2091,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   score: 10
+  witchMaxHealth: 5
+  witchMaxMana: 100
+  witchCurrHealth: 100
   scoreText: {fileID: 1589389988}
 --- !u!4 &971505615
 Transform:
@@ -2647,7 +2650,7 @@ MonoBehaviour:
   teleport_cd: 0
   rotate: 0
   teleport_cd_duration: 1
-  prefab_ShieldRenderer: {fileID: 4647294966478372044, guid: 289f5431d92c5aa0686090514d70be42,
+  prefab_ShieldRenderer: {fileID: 2952861026592842111, guid: d346a4820c9e77a63bbf7ed9644d4da1,
     type: 3}
   _angle: 0
 --- !u!212 &1798255921

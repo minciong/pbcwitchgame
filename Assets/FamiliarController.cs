@@ -53,7 +53,7 @@ public class FamiliarController : MonoBehaviour
       //Shield control, affects TrailRenderer
       if (Input.GetButtonDown("DrawShield")){
         Debug.Log("Draw shield!");
-        shieldRenderer = (GameObject)Instantiate(prefab_ShieldRenderer, transform);
+        shieldRenderer = (GameObject)Instantiate(prefab_ShieldRenderer, this.transform);
       }
 
       //Destroy TrailRenderer

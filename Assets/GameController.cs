@@ -11,9 +11,9 @@ public class GameController : MonoBehaviour {
 	public Text scoreText;
 	// Use this for initialization
 	void Start () {
-		
+
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 		var v3 = Input.mousePosition;
@@ -25,5 +25,5 @@ public class GameController : MonoBehaviour {
 	public void UpdateScore(int value){
 		score+=value;
 	}
-	
+
 }
