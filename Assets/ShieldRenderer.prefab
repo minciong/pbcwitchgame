@@ -82,7 +82,7 @@ TrailRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.25961494
+        value: 0
         inSlope: -0.060210545
         outSlope: -0.060210545
         tangentMode: 0
@@ -90,8 +90,8 @@ TrailRenderer:
         inWeight: 0.33333334
         outWeight: 0.3991228
       - serializedVersion: 3
-        time: 0.1
-        value: 0.5
+        time: 0.49956667
+        value: 0.31579208
         inSlope: -0.24972492
         outSlope: -0.24972492
         tangentMode: 0
@@ -146,7 +146,7 @@ TrailRenderer:
     shadowBias: 0.5
     generateLightingData: 0
   m_MinVertexDistance: 0.05
-  m_Autodestruct: 0
+  m_Autodestruct: 1
   m_Emitting: 1
 --- !u!114 &6058664368249651749
 MonoBehaviour:
@@ -177,7 +177,7 @@ EdgeCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_EdgeRadius: 0
+  m_EdgeRadius: 0.5
   m_Points:
   - {x: -0.5, y: 0}
   - {x: 0.5, y: 0}
