@@ -7,15 +7,17 @@ public class GenericController : MonoBehaviour {
 
 	protected float TerrainDistance (bool dir) { //direction to raycast, false for horizontal, true for vertical
     var mask = LayerMask.GetMask("Terrain"); //only check against Terrain layer
-    var checkDirection = -Vector3.right;
-    if (dir){checkDirection = -Vector3.up;}
-		var results = new RaycastHit2D[1];
-		var count = GetComponent<CapsuleCollider2D>().Raycast(checkDirection, results, mask);
-		if(count < 1){
-			return 1000;
+    Vector2 checkDirection = -Vector2.right; //check from horizontally
+    if (dir){checkDirection = -Vector2.up;} //unless dir is true
+		
+		//Defined As:
+		//public static RaycastHit2D Raycast(Vector2 origin, Vector2 direction, float distance = Mathf.Infinity, int layerMask = DefaultRaycastLayers, float minDepth = -Mathf.Infinity, float maxDepth = Mathf.Infinity);
+		RaycastHit2D results = Physics2D.Raycast(transform.position, checkDirection, Mathf.Infinity, mask);
+		if (results.collider != null){
+			return results.distance;
 		}
 		else{
-			return results[0].distance;
+			return Mathf.Infinity;
 		}
   }
 
