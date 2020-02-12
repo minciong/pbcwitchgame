@@ -19,6 +19,7 @@ public class ShieldController : MonoBehaviour
       trailFollower = this.transform.parent; //get the familiar
       startLocation = trailFollower.transform.position; //needed to fix offset issues later
       edgeCollider.enabled = false; //avoid colliding with anything until drawn
+      Physics2D.IgnoreLayerCollision(0,10);
     }
 
     // Update is called once per frame
@@ -39,10 +40,10 @@ public class ShieldController : MonoBehaviour
         edgeCollider.points = edgePoints;
       }
     }
-    void OnCollisionEnter2D(Collision2D collision){
+   //  void OnCollisionEnter2D(Collision2D collision){
 
-    if (collision.gameObject.tag == "Player"){ //ignore player collision entirely
-      Physics2D.IgnoreCollision(collision.collider, edgeCollider);
-    }
-   }
+   //  if (collision.gameObject.tag == "Player"){ //ignore player collision entirely
+   //    Physics2D.IgnoreCollision(collision.collider, edgeCollider);
+   //  }
+   // }
 }
