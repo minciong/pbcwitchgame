@@ -33,17 +33,18 @@ public class PlayerController : GenericController {
 		playerBody = GetComponent<Rigidbody2D>();
 	}
 
-	//FixedUpdate works independent of frame rate, for interaction with the physics system
-	// void FixedUpdate () {
-	// }
+	// FixedUpdate works independent of frame rate, for interaction with the physics system
+	void FixedUpdate () {
+		if(Input.GetButton("Down")){
+			playerBody.velocity += duckRate * Vector2.down; //Increases falling speed
+		}
+	}
 
 	// Update is called once per frame
 	void Update () {
 		var isMoving = false;
 		var isDucking = false;
-		if(Input.GetButton("Down")){
-			playerBody.velocity += duckRate * Vector2.down; //Increases falling speed
-		}
+
 		// Initial Jump
 		if (Input.GetButtonDown("Jump") && TerrainDistance(true) < 1.2f){
 			isJumping = true;

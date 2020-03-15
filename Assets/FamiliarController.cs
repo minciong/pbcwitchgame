@@ -11,12 +11,15 @@ public class FamiliarController : MonoBehaviour
     // https://answers.unity.com/questions/1164022/move-a-2d-item-in-a-circle-around-a-fixed-point.html
     public float RotateSpeed = 10f;
     public float accelerate = 0;
-    public float accelerate_step = 12;
+    public float accelerate_step = 16;
     public float maxspeed = 2000f;
     public bool teleport_cd = false;
     public bool rotate = false;
     public int teleport_cd_duration = 0;
     protected bool teleportOverride = false; //prevents teleports if true
+    protected CapsuleCollider2D fCollider; //to reference the placed collider
+    public Object prefab_ShieldRenderer;
+    protected GameObject shieldRenderer;
 
     // private Vector2 _centre;
     public float _angle;
@@ -24,18 +27,22 @@ public class FamiliarController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+      fCollider = GetComponent<CapsuleCollider2D>(); //get collider for use later
+      // prefab_ShieldRenderer = Resources.Load("ShieldRenderer"); //prepare prefab
     }
 
-
    void OnCollisionEnter2D(Collision2D collision){
-    if (collision.collider.name == "TerrainTilemap"){ //when we collide with the tilemap, no teleports
+    if (collision.gameObject.tag == "Terrain"){ //when we collide with the tilemap, no teleports
       teleportOverride = true;
+    }
+
+    if (collision.gameObject.tag == "Player"){ //ignore player collision entirely
+      Physics2D.IgnoreCollision(collision.collider, fCollider);
     }
    }
 
    void OnCollisionExit2D(Collision2D collision){
-     if (collision.collider.name == "TerrainTilemap"){ //stopped colliding with the tilemap, teleport allowed
+     if (collision.gameObject.tag == "Terrain"){ //stopped colliding with the tilemap, teleport allowed
        teleportOverride = false;
      }
    }
@@ -43,6 +50,16 @@ public class FamiliarController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+      //Shield control, affects TrailRenderer
+      if (Input.GetButtonDown("DrawShield")){
+        Debug.Log("Draw shield!");
+        shieldRenderer = (GameObject)Instantiate(prefab_ShieldRenderer, this.transform);
+      }
+
+      //Destroy TrailRenderer
+      if (Input.GetButtonUp("DrawShield")){
+        shieldRenderer.transform.parent = null;
+      }
 
       if (Input.GetButton("familiarSwap"))
         rotate = !rotate;

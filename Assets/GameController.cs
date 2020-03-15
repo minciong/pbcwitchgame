@@ -4,12 +4,16 @@ using UnityEngine;
 using UnityEngine.UI;
 public class GameController : MonoBehaviour {
 	public int score = 10;
+	public int witchMaxHealth=5;
+	public int witchMaxMana=100;
+	public int witchCurrHealth=5;
+	public int witchCurrMana=100;
 	public Text scoreText;
 	// Use this for initialization
 	void Start () {
-		
+
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 		var v3 = Input.mousePosition;
@@ -21,5 +25,5 @@ public class GameController : MonoBehaviour {
 	public void UpdateScore(int value){
 		score+=value;
 	}
-	
+
 }

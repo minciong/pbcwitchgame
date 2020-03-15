@@ -210,7 +210,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 28513027}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.55, y: 0.15, z: -10}
+  m_LocalPosition: {x: 19.84, y: 8.48, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 833878660}
@@ -411,7 +411,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 55486082}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.08, y: -2, z: 0}
+  m_LocalPosition: {x: 21.31, y: 6.33, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -565,7 +565,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 371067762}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 22.39, y: 8.33, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2091,6 +2091,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   score: 10
+  witchMaxHealth: 5
+  witchMaxMana: 100
+  witchCurrHealth: 100
+  witchCurrMana: 100
   scoreText: {fileID: 1589389988}
 --- !u!4 &971505615
 Transform:
@@ -2100,7 +2104,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 971505613}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 588.0855, y: 299.39322, z: 0}
+  m_LocalPosition: {x: 610.4755, y: 307.7232, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2143,7 +2147,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1232503908}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 22.39, y: 8.33, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 550068027}
@@ -2164,8 +2168,8 @@ GameObject:
   - component: {fileID: 1287838256}
   - component: {fileID: 1287838258}
   - component: {fileID: 1287838259}
-  m_Layer: 9
-  m_Name: mario_stand
+  m_Layer: 10
+  m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2229,7 +2233,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1287838253}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.56, y: -0.66, z: 0}
+  m_LocalPosition: {x: 14.83, y: 7.67, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2273,10 +2277,10 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 5
+  m_Mass: 3
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 5
+  m_GravityScale: 3
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -2394,7 +2398,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1417991896}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.5947075, y: -0.09340913, z: -9.940704}
+  m_LocalPosition: {x: 19.795292, y: 8.23659, z: -9.940704}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2590,7 +2594,7 @@ GameObject:
   - component: {fileID: 1798255920}
   - component: {fileID: 1798255919}
   m_Layer: 9
-  m_Name: GameObject
+  m_Name: Familiar
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -2604,7 +2608,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1798255917}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.74, y: 1.5, z: -9.940704}
+  m_LocalPosition: {x: 16.65, y: 9.83, z: -9.940704}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2642,11 +2646,13 @@ MonoBehaviour:
   witch_character: {fileID: 1287838255}
   RotateSpeed: 10
   accelerate: 0
-  accelerate_step: 16
-  maxspeed: 1000
+  accelerate_step: 12
+  maxspeed: 2000
   teleport_cd: 0
   rotate: 0
-  teleport_cd_duration: 0
+  teleport_cd_duration: 1
+  prefab_ShieldRenderer: {fileID: 2952861026592842111, guid: d346a4820c9e77a63bbf7ed9644d4da1,
+    type: 3}
   _angle: 0
 --- !u!212 &1798255921
 SpriteRenderer:
