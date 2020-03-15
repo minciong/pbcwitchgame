@@ -11,7 +11,14 @@ public class Bolt : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        rb.velocity = transform.right*speed;
+        rb.velocity = transform.right;
+        if(Input.GetButton("Up")){
+        	rb.velocity += new Vector2(0,1);
+        }
+        else if(Input.GetButton("Down")){
+        	rb.velocity += new Vector2(0,-1);
+        }
+        rb.velocity = speed * rb.velocity.normalized;
         Destroy(gameObject, lifetime);
     }
 
