@@ -98,12 +98,14 @@ public class PlayerController : GenericController {
 
 		if (Input.GetButton("Left")){
 			isMoving = true;
-			transform.localScale = new Vector3(-1,1,1); //flip sprite left
+			// transform.localScale = new Vector3(-1,1,1); //flip sprite left
+			transform.rotation = new Quaternion(0,180,0,0);
 		}
 
 		if (Input.GetButton("Right")){
 			isMoving = true;
-			transform.localScale = new Vector3(1,1,1);
+			// transform.localScale = new Vector3(1,1,1);
+			transform.rotation = new Quaternion(0,0,0,0);
 		}
 
 
