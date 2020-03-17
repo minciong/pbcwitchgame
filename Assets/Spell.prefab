@@ -135,3 +135,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 20
   rb: {fileID: 7576129063147276958}
+  bulletgrowth: 10
+  lifetime: 0.5

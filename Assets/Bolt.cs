@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Bolt : MonoBehaviour
 {
-	public float speed = 5f;
+	public float speed = 20f;
 	public Rigidbody2D rb ;
-	public float bulletgrowth = 3f;
-	public float lifetime = 0.5f;
+	public float bulletgrowth = 10f;
+	public float lifetime = 1f;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,7 +18,7 @@ public class Bolt : MonoBehaviour
         else if(Input.GetButton("Down")){
         	rb.velocity += new Vector2(0,-1);
         }
-        rb.velocity = speed * rb.velocity.normalized;
+        rb.velocity = rb.velocity.normalized*speed;
         Destroy(gameObject, lifetime);
     }
 

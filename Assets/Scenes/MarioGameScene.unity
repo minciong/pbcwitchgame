@@ -2093,9 +2093,11 @@ MonoBehaviour:
   score: 10
   witchMaxHealth: 5
   witchMaxMana: 100
-  witchCurrHealth: 100
+  witchCurrHealth: 105
   witchCurrMana: 100
   scoreText: {fileID: 1589389988}
+  hpText: {fileID: 1960403926}
+  mpText: {fileID: 1112132906}
 --- !u!4 &971505615
 Transform:
   m_ObjectHideFlags: 0
@@ -2387,6 +2389,11 @@ MonoBehaviour:
   duckRate: 0.7
   animationTimer: 0
   jumpTime: 0.3
+  health: 5
+  maxHealth: 5
+  mana: 100
+  maxMana: 100
+  manaRegen: 1
 --- !u!70 &1287838259
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
