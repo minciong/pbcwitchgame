@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Bolt : MonoBehaviour
 {
-	public float speed = 10f;
+	public float speed = 5f;
 	public Rigidbody2D rb ;
-	public float bulletgrowth = 10f;
-	public float lifetime = 1f;
+	public float bulletgrowth = 3f;
+	public float lifetime = 0.5f;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,9 +25,9 @@ public class Bolt : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-     	transform.localScale += new Vector3(bulletgrowth*Mathf.Sin(Time.deltaTime),
-     										bulletgrowth*Mathf.Sin(Time.deltaTime),
-     										bulletgrowth*Mathf.Sin(Time.deltaTime));  
+     	transform.localScale += new Vector3(bulletgrowth* Time.deltaTime,
+     										bulletgrowth* Time.deltaTime,
+     										bulletgrowth* Time.deltaTime);  
 
     }
 }

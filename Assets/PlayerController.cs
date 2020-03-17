@@ -16,6 +16,11 @@ public class PlayerController : GenericController {
 	public float duckRate = 0.05f; //negative y velocity from ducking mid-air
 	public float animationTimer = 0;
 	public float jumpTime = 0;
+	public int health = 5;
+	public int maxHealth = 5;
+	public int mana = 100;
+	public int maxMana = 100;
+	public int manaRegen = 1;
 	protected bool isJumping;
 	protected float jumpTimeCounter;
 	protected Sprite[] moveSprites;
@@ -37,6 +42,9 @@ public class PlayerController : GenericController {
 	void FixedUpdate () {
 		if(Input.GetButton("Down")){
 			playerBody.velocity += duckRate * Vector2.down; //Increases falling speed
+		}
+		if(mana<maxMana){
+			updateMana(manaRegen);
 		}
 	}
 
@@ -134,7 +142,15 @@ public class PlayerController : GenericController {
 		//END: sprite logic
 
 	}
+	public void updateHealth(int deltaHealth){
+		health += deltaHealth;
+		GameObject.Find("GameController").GetComponent<GameController>().UpdateScore(health);
 
+	}
+	public void updateMana(int deltaMana){
+		mana += deltaMana;
+		GameObject.Find("GameController").GetComponent<GameController>().UpdateScore(mana);
+	}
 	public void OnKillPlayer(){
 		SceneManager.LoadScene("GameOverScene");
 	}

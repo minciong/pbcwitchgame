@@ -9,6 +9,8 @@ public class GameController : MonoBehaviour {
 	public int witchCurrHealth=5;
 	public int witchCurrMana=100;
 	public Text scoreText;
+	public Text hpText;
+	public Text mpText;
 	// Use this for initialization
 	void Start () {
 
@@ -21,9 +23,17 @@ public class GameController : MonoBehaviour {
 		//Debug.Log(v3);
 
 		scoreText.text = "Score: " + score;
+		hpText.text = "HP: " + witchCurrHealth;
+		mpText.text = "MP: " + witchCurrMana;
 	}
 	public void UpdateScore(int value){
 		score+=value;
+	}
+	public void UpdateHealth(int value){
+		witchCurrHealth = value;
+	}
+	public void UpdateMana(int value){
+		witchCurrMana = value;
 	}
 
 }
