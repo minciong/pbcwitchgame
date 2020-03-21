@@ -6,21 +6,23 @@ using UnityEngine.SceneManagement;
 public class PlayerController : GenericController {
 	protected private SpriteRenderer playerSpriteRenderer;
 	protected private Rigidbody2D playerBody;
-	public float jumpForce = 13f;
+
+	protected float jumpForce = 13f;
 	protected float xVelocity = 0;
-	public float accel = 30f; //value of increased speed for chosen direction
-	public float decel = 30f; //value of decreased speed for chosen direction
-	public float xMaxVel = 10f; //maximum x velocity allowed
-	public float sprintMult = 1.5f; //sprint multiplier
-	public float sprintVal = 1f; //how much sprint currently
-	public float duckRate = 0.05f; //negative y velocity from ducking mid-air
-	public float animationTimer = 0;
-	public float jumpTime = 0;
-	public int health = 5;
-	public int maxHealth = 5;
-	public int mana = 100;
-	public int maxMana = 100;
+	protected float accel = 30f; //value of increased speed for chosen direction
+	protected float decel = 30f; //value of decreased speed for chosen direction
+	protected float xMaxVel = 10f; //maximum x velocity allowed
+	protected float sprintMult = 1.5f; //sprint multiplier
+	protected float sprintVal = 1f; //how much sprint currently
+	protected float duckRate = 0.05f; //negative y velocity from ducking mid-air
+	protected float animationTimer = 0;
+	protected float jumpTime = 0;
+
+	public float maxHealth { get; set; } = 100;
+	public float mana { get; set; } = 100;
+	public float maxMana { get; set; } = 100;
 	public int manaRegen = 1;
+
 	protected bool isJumping;
 	protected float jumpTimeCounter;
 	protected Sprite[] moveSprites;
@@ -36,6 +38,10 @@ public class PlayerController : GenericController {
 
 		playerSpriteRenderer = GetComponent<SpriteRenderer>();
 		playerBody = GetComponent<Rigidbody2D>();
+
+		//change inherited values
+		this.health =  100;
+		this.damage = 0;
 	}
 
 	// FixedUpdate works independent of frame rate, for interaction with the physics system
@@ -43,7 +49,7 @@ public class PlayerController : GenericController {
 		if(Input.GetButton("Down")){
 			playerBody.velocity += duckRate * Vector2.down; //Increases falling speed
 		}
-		if(mana<maxMana){
+		if(mana < maxMana){
 			updateMana(manaRegen);
 		}
 	}
@@ -140,17 +146,12 @@ public class PlayerController : GenericController {
 		}
 
 		//END: sprite logic
-
 	}
-	public void updateHealth(int deltaHealth){
-		health += deltaHealth;
-		GameObject.Find("GameController").GetComponent<GameController>().UpdateScore(health);
 
-	}
 	public void updateMana(int deltaMana){
 		mana += deltaMana;
-		GameObject.Find("GameController").GetComponent<GameController>().UpdateScore(mana);
 	}
+
 	public void OnKillPlayer(){
 		SceneManager.LoadScene("GameOverScene");
 	}

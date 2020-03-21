@@ -19,7 +19,6 @@ public class ShieldController : MonoBehaviour
       trailFollower = this.transform.parent; //get the familiar
       startLocation = trailFollower.transform.position; //needed to fix offset issues later
       edgeCollider.enabled = false; //avoid colliding with anything until drawn
-      Physics2D.IgnoreLayerCollision(0,10);
     }
 
     // Update is called once per frame
@@ -31,7 +30,7 @@ public class ShieldController : MonoBehaviour
         Vector2[] edgePoints = new Vector2[trailPointNum];
         int i = 0;
         foreach (Vector3 point in trailPoints){ //convert v3 array to v2 array
-          Debug.Log(point);
+          // Debug.Log(point);
           edgePoints[i] = point;
           i++;
         }

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - The Player
   - Terrain
+  - Enemies
   layers:
   - Default
   - TransparentFX

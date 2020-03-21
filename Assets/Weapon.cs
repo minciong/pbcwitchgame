@@ -11,9 +11,10 @@ public class Weapon : MonoBehaviour
     {
     	if(Input.GetButtonDown("Fire1")){
     		Shoot();
-    	}   
+    	}
     }
+    
     void Shoot(){
-    	Instantiate(boltPrefab,Castpoint.position,Castpoint.rotation);
+    	Instantiate(boltPrefab, Castpoint.position, Castpoint.rotation);
     }
 }

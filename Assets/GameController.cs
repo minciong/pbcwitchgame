@@ -3,17 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 public class GameController : MonoBehaviour {
-	public int score = 10;
-	public int witchMaxHealth=5;
-	public int witchMaxMana=100;
-	public int witchCurrHealth=5;
-	public int witchCurrMana=100;
+	protected int score = 10;
+	public GameObject witchObject;
 	public Text scoreText;
 	public Text hpText;
 	public Text mpText;
 	// Use this for initialization
 	void Start () {
-
+		Physics2D.IgnoreLayerCollision(10,10); //don't let the  player layer collide with itself
+		Physics2D.IgnoreLayerCollision(0, 8); //don't allow the familiar to collide with terrain
 	}
 
 	// Update is called once per frame
@@ -23,17 +21,17 @@ public class GameController : MonoBehaviour {
 		//Debug.Log(v3);
 
 		scoreText.text = "Score: " + score;
-		hpText.text = "HP: " + witchCurrHealth;
-		mpText.text = "MP: " + witchCurrMana;
-	}
-	public void UpdateScore(int value){
-		score+=value;
-	}
-	public void UpdateHealth(int value){
-		witchCurrHealth = value;
-	}
-	public void UpdateMana(int value){
-		witchCurrMana = value;
-	}
+		hpText.text = "HP: " + witchObject.GetComponent<PlayerController>().health + " / " + witchObject.GetComponent<PlayerController>().maxHealth;
+		mpText.text = "MP: " + witchObject.GetComponent<PlayerController>().mana + " / " + witchObject.GetComponent<PlayerController>().maxMana;
+	 }
+	// public void UpdateScore(int value){
+	// 	score+=value;
+	// }
+	// public void UpdateHealth(int value){
+	// 	witchCurrHealth = value;
+	// }
+	// public void UpdateMana(int value){
+	// 	witchCurrMana = value;
+	// }
 
 }
