@@ -16,7 +16,7 @@ public class PlayerController : GenericController {
 	protected float sprintVal = 1f; //how much sprint currently
 	protected float duckRate = 0.05f; //negative y velocity from ducking mid-air
 	protected float animationTimer = 0;
-	protected float jumpTime = 0;
+	protected float jumpTime = 0.3f;
 
 	public float maxHealth { get; set; } = 100;
 	public float mana { get; set; } = 100;
