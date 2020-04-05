@@ -11,6 +11,7 @@ public class Health : MonoBehaviour
     public Image[] hearts;
     protected Sprite[] fullheart;//= Resources.LoadAll<Sprite>("Sprites/hagheart.png");	
     protected Sprite emptyheart;
+    public Sprite curr;
 
     // Start is called before the first frame update
     void Start()
@@ -28,10 +29,11 @@ public class Health : MonoBehaviour
 			health=maxhealth;
 		}
     	animationTimer += Time.deltaTime;
-		animationTimer %= 0.3f;
+		animationTimer %= 0.45f;
+		curr=fullheart[(int)(animationTimer/0.15f)];
         for(int i=0; i < hearts.Length; i++){
         	if(i<health){
-        		hearts[i].sprite=fullheart[(int)(animationTimer/0.1f)];
+        		hearts[i].sprite=curr;
         	}
         	else{
         		hearts[i].sprite=emptyheart;	
