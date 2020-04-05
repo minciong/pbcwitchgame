@@ -1,16 +1,19 @@
 fileFormatVersion: 2
-guid: 29ab9c61be2294eda82f225e2f274daa
+guid: 1ce58b2cb70ca6183b5f6a213392aab7
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8003260396191338441
-    second: coins_0
+      213: -2677554609601577626
+    second: hagheart_0
   - first:
-      213: 2154074400079490951
-    second: coins_1
+      213: 2904099860913761352
+    second: hagheart_1
   - first:
-      213: -8722020019358736109
-    second: coins_2
+      213: 3283702107479162072
+    second: hagheart_2
+  - first:
+      213: -6471757628613008828
+    second: hagheart_3
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -93,29 +96,17 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 0
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 1
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: coins_0
+      name: hagheart_0
       rect:
         serializedVersion: 2
-        x: 3
-        y: 1
-        width: 10
-        height: 14
+        x: 0
+        y: 0
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -123,20 +114,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 80bc1a7b7facf9a378e0dbadb7bfd704
-      internalID: 8003260396191338441
+      spriteID: 16ed102f848853c769de91e3eec1d60f
+      internalID: -2677554609601577626
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: coins_1
+      name: hagheart_1
       rect:
         serializedVersion: 2
-        x: 19
-        y: 1
-        width: 10
-        height: 14
+        x: 16
+        y: 0
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -144,20 +135,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7f18d39f554213d328adccf032e55c0a
-      internalID: 2154074400079490951
+      spriteID: 456236c085894ccdb89a24d216a4055b
+      internalID: 2904099860913761352
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: coins_2
+      name: hagheart_2
       rect:
         serializedVersion: 2
-        x: 35
-        y: 1
-        width: 10
-        height: 14
+        x: 32
+        y: 0
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -165,8 +156,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5f142e5b098c54100ba143863956a82e
-      internalID: -8722020019358736109
+      spriteID: 91b8410ab11cae85cb33ad0648e7ee75
+      internalID: 3283702107479162072
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: hagheart_3
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7544d353c2fc447f688f08dd9675c3fd
+      internalID: -6471757628613008828
       vertices: []
       indices: 
       edges: []
@@ -174,7 +186,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 4e250622f28794f369e712672d509dd3
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
