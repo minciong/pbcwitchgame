@@ -25,9 +25,9 @@ public class GenericController : MonoBehaviour {
   }
 
 	public void OnCollisionEnter2D (Collision2D c){
-		Debug.Log(this.gameObject.name + " is colliding! " );
+		// Debug.Log(this.gameObject.name + " is colliding! " );
 		var collider = c.collider.GetComponent<GenericController>();
-		Debug.Log(this.gameObject.name + "is colliding with " + c.gameObject.name);
+		// Debug.Log(this.gameObject.name + "is colliding with " + c.gameObject.name);
 		if(collider != null){ //if the collider exist
 			this.health -= collider.damage;
 			Debug.Log("Collided with: " + c.gameObject.name + ". Damage =  " + collider.damage);
