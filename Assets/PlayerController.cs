@@ -18,7 +18,7 @@ public class PlayerController : GenericController {
 	protected float animationTimer = 0;
 	protected float jumpTime = 0.3f;
 
-	public float maxHealth { get; set; } = 100;
+	public float maxHealth { get; set; } = 5;
 	public float mana { get; set; } = 100;
 	public float maxMana { get; set; } = 100;
 	public int manaRegen = 1;
@@ -40,7 +40,7 @@ public class PlayerController : GenericController {
 		playerBody = GetComponent<Rigidbody2D>();
 
 		//change inherited values
-		this.health =  100;
+		this.health =  5;
 		this.damage = 0;
 	}
 

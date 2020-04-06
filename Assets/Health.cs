@@ -16,6 +16,11 @@ public class Health : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+		
+    	GameObject[] tmp = GameObject.FindGameObjectsWithTag("Heart");
+    	for(int i=0; i < tmp.Length; i++){
+    		hearts[i]=tmp[i].GetComponent<Image>();
+    	}
         fullheart = Resources.LoadAll<Sprite>("Sprites/hagheart");
         emptyheart = fullheart[3];
         // Debug.Log(fullheart);
