@@ -39,10 +39,4 @@ public class ShieldController : MonoBehaviour
         edgeCollider.points = edgePoints;
       }
     }
-   //  void OnCollisionEnter2D(Collision2D collision){
-
-   //  if (collision.gameObject.tag == "Player"){ //ignore player collision entirely
-   //    Physics2D.IgnoreCollision(collision.collider, edgeCollider);
-   //  }
-   // }
 }

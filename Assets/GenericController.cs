@@ -29,9 +29,7 @@ public class GenericController : MonoBehaviour {
 		var collider = c.collider.GetComponent<GenericController>();
 		// Debug.Log(this.gameObject.name + "is colliding with " + c.gameObject.name);
 		if(collider != null){ //if the collider exist
-			this.health -= collider.damage;
-			Debug.Log("Collided with: " + c.gameObject.name + ". Damage =  " + collider.damage);
-			Debug.Log("Entity: " + this.gameObject.name + " = " + this.health);
+			this.health -= collider.damage; //subtract health from the collider's damage value
 			if (this.health <= 0){
 				Object.Destroy(this.gameObject);
 			}

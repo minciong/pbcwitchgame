@@ -41,6 +41,7 @@ public class PlayerController : GenericController {
 
 		//change inherited values
 		this.health =  5;
+		this.maxHealth = 5;
 		this.damage = 0;
 	}
 
@@ -79,6 +80,7 @@ public class PlayerController : GenericController {
 		// Jump not being held
 		if (Input.GetButtonUp("Jump")){
 			isJumping = false;
+			mana -= 50;
 		}
 		// Acceleration
 		if (Input.GetButtonDown("Sprint")){
