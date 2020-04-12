@@ -80,7 +80,7 @@ public class PlayerController : GenericController {
 		// Jump not being held
 		if (Input.GetButtonUp("Jump")){
 			isJumping = false;
-			mana -= 50;
+			updateMana(-50);
 		}
 		// Acceleration
 		if (Input.GetButtonDown("Sprint")){
@@ -151,7 +151,15 @@ public class PlayerController : GenericController {
 	}
 
 	public void updateMana(int deltaMana){
+		//if familiar disabled and deltamana<0, break
 		mana += deltaMana;
+		if(mana<0){
+			mana=0;
+			//disable familiar
+		}
+		//if(familiar disabled and mana==100){ 
+		//enable familiar
+		//}
 	}
 
 	public void OnKillPlayer(){
