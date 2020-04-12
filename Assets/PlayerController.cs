@@ -6,16 +6,23 @@ using UnityEngine.SceneManagement;
 public class PlayerController : GenericController {
 	protected private SpriteRenderer playerSpriteRenderer;
 	protected private Rigidbody2D playerBody;
-	public float jumpForce = 13f;
+
+	protected float jumpForce = 13f;
 	protected float xVelocity = 0;
-	public float accel = 30f; //value of increased speed for chosen direction
-	public float decel = 30f; //value of decreased speed for chosen direction
-	public float xMaxVel = 10f; //maximum x velocity allowed
-	public float sprintMult = 1.5f; //sprint multiplier
-	public float sprintVal = 1f; //how much sprint currently
-	public float duckRate = 0.05f; //negative y velocity from ducking mid-air
-	public float animationTimer = 0;
-	public float jumpTime = 0;
+	protected float accel = 30f; //value of increased speed for chosen direction
+	protected float decel = 30f; //value of decreased speed for chosen direction
+	protected float xMaxVel = 10f; //maximum x velocity allowed
+	protected float sprintMult = 1.5f; //sprint multiplier
+	protected float sprintVal = 1f; //how much sprint currently
+	protected float duckRate = 0.05f; //negative y velocity from ducking mid-air
+	protected float animationTimer = 0;
+	protected float jumpTime = 0.3f;
+
+	public float maxHealth { get; set; } = 5;
+	public float mana { get; set; } = 100;
+	public float maxMana { get; set; } = 100;
+	protected float manaRegen = 0.1f;
+
 	protected bool isJumping;
 	protected float jumpTimeCounter;
 	protected Sprite[] moveSprites;
@@ -31,12 +38,20 @@ public class PlayerController : GenericController {
 
 		playerSpriteRenderer = GetComponent<SpriteRenderer>();
 		playerBody = GetComponent<Rigidbody2D>();
+
+		//change inherited values
+		this.health =  5;
+		this.maxHealth = 5;
+		this.damage = 0;
 	}
 
 	// FixedUpdate works independent of frame rate, for interaction with the physics system
 	void FixedUpdate () {
 		if(Input.GetButton("Down")){
 			playerBody.velocity += duckRate * Vector2.down; //Increases falling speed
+		}
+		if(mana < maxMana){
+			updateMana(manaRegen);
 		}
 	}
 
@@ -132,10 +147,24 @@ public class PlayerController : GenericController {
 		}
 
 		//END: sprite logic
-
 	}
 
-	public void OnKillPlayer(){
+	public bool updateMana(float deltaMana){
+		//if familiar disabled and deltamana < 0, break
+		float tempMana = this.mana + deltaMana;
+		if(tempMana >= 0){ //if action is possible with our current mana
+			this.mana = tempMana; //apply changes
+			return true; //return that it was possible
+		}
+		else {
+			return false;
+		}
+		//if(familiar disabled and mana==100){
+		//enable familiar
+		//}
+	}
+
+	protected override void onDeathAction(){ //for the player, we want the game over screen, not to destroy the object
 		SceneManager.LoadScene("GameOverScene");
 	}
 }

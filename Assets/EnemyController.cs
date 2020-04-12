@@ -2,14 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GoombaController : GenericController {
+public class EnemyController : GenericController {
 	protected float movespeed = 2.5f;
 	protected float animationTimer = 0;
 	protected int scorevalue = 100;
 	protected Vector3 direction = -Vector3.right;
 	// Use this for initialization
 	void Start () {
-
+		//change inherited values
+		this.health = 10;
+		this.damage = 1;
 	}
 
 	// Update is called once per frame
@@ -22,25 +24,10 @@ public class GoombaController : GenericController {
 		animationTimer %= 0.5f;
 		if(animationTimer <= 0.25f){
 			transform.localScale = new Vector3(-1,1,1);
-		}else{
+		}
+		else{
 			transform.localScale = new Vector3(1,1,1);
 		}
 
-	}
-
-	public void OnCollisionEnter2D (Collision2D c){
-
-		var player = c.collider.GetComponent<PlayerController>();
-		if(player != null){
-			if(player.transform.position.y >transform.position.y+1){
-				GameObject.Find("GameController").GetComponent<GameController>().UpdateScore(scorevalue);
-				Destroy(gameObject);
-			}
-
-			else{
-				//Destroy(player.gameObject);
-				player.OnKillPlayer();
-			}
-		}
 	}
 }

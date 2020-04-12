@@ -4,9 +4,16 @@ using UnityEngine;
 
 public class FamiliarController : MonoBehaviour
 {
+
+    protected GameObject witchObject; // Witch Object
+    protected PlayerController playerScript; //script within the witch object
+
     public float radius = 3;
     protected bool teleported = false;
-    public Transform witch_character; // Witch Object
+
+    protected float shieldMana = -10f; //amount of mana shield will use
+    protected float teleportMana = -2f; //amount of mana teleport will use
+
     // ROTATE PROPERTY OF TELEPORT
     // https://answers.unity.com/questions/1164022/move-a-2d-item-in-a-circle-around-a-fixed-point.html
     public float RotateSpeed = 10f;
@@ -29,6 +36,11 @@ public class FamiliarController : MonoBehaviour
     {
       fCollider = GetComponent<CapsuleCollider2D>(); //get collider for use later
       // prefab_ShieldRenderer = Resources.Load("ShieldRenderer"); //prepare prefab
+
+      witchObject = GameObject.Find("Player");
+
+      playerScript = witchObject.GetComponent<PlayerController>(); //for use in adjusting mana values
+
     }
 
    void OnCollisionEnter2D(Collision2D collision){
@@ -51,8 +63,7 @@ public class FamiliarController : MonoBehaviour
     void Update()
     {
       //Shield control, affects TrailRenderer
-      if (Input.GetButtonDown("DrawShield")){
-        Debug.Log("Draw shield!");
+      if (Input.GetButtonDown("DrawShield") && playerScript.updateMana(shieldMana)){
         shieldRenderer = (GameObject)Instantiate(prefab_ShieldRenderer, this.transform);
       }
 
@@ -65,10 +76,10 @@ public class FamiliarController : MonoBehaviour
         rotate = !rotate;
 
       Camera camera = GetComponent<Camera>();
-      float distance = Vector3.Distance(transform.position, witch_character.gameObject.transform.position);
+      float distance = Vector3.Distance(transform.position, witchObject.gameObject.transform.position);
       // angle = Camera.main.ScreenToWorldPoint(Input.mousePosition);
       // Debug.Log(transform.position);
-      var witchPos = witch_character.gameObject.transform.position;
+      var witchPos = witchObject.gameObject.transform.position;
       var mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
       var direction = new Vector3(mouse.x, mouse.y, 0) - witchPos;
       Vector3 new_pos;
@@ -90,14 +101,14 @@ public class FamiliarController : MonoBehaviour
       }
 
 
-      // Debug.Log(witch_character.gameObject.transform.position);
+      // Debug.Log(witchObject.gameObject.transform.position);
       // Debug.Log(distance);
-      if (Input.GetButtonDown("Teleport") && !teleported && !teleport_cd && !teleportOverride)
+      if (Input.GetButtonDown("Teleport") && playerScript.updateMana(teleportMana) && !teleported && !teleport_cd && !teleportOverride)
       {
           var temp = witchPos;
-          Vector3 targetDir = witch_character.position - transform.position;
+          Vector3 targetDir = witchObject.transform.position - transform.position;
           _angle = (Vector3.SignedAngle(targetDir, transform.up, transform.forward)/180) * Mathf.PI;
-          witch_character.position = transform.position;
+          witchObject.transform.position = transform.position;
           transform.position = temp;
           teleported = true;
           teleport_cd = true;
@@ -115,7 +126,7 @@ public class FamiliarController : MonoBehaviour
             _angle += RotateSpeed * Time.deltaTime*(accelerate/100);
             if(accelerate < maxspeed){ accelerate += accelerate_step; }
             var offset = new Vector3(Mathf.Sin(_angle), Mathf.Cos(_angle), 0) * radius;
-            transform.position = witch_character.position + offset;
+            transform.position = witchObject.transform.position + offset;
           }
             var difference = transform.position - new_pos;
 
