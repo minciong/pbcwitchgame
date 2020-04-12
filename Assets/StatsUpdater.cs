@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class StatsUpdater : MonoBehaviour {
-    public GameObject witchObject;
+    protected GameObject witchObject;
     protected PlayerController playerScript;
 
     public GameObject manaBar;
@@ -24,6 +24,8 @@ public class StatsUpdater : MonoBehaviour {
 
     // Start is called before the first frame update
     void Start(){
+      witchObject = GameObject.Find("Player");
+
       manaBar = GameObject.Find("ManaBar");
       manaSlider = manaBar.GetComponent<Slider>();
 

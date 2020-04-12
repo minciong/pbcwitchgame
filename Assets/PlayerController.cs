@@ -21,7 +21,7 @@ public class PlayerController : GenericController {
 	public float maxHealth { get; set; } = 5;
 	public float mana { get; set; } = 100;
 	public float maxMana { get; set; } = 100;
-	public int manaRegen = 1;
+	protected float manaRegen = 0.1f;
 
 	protected bool isJumping;
 	protected float jumpTimeCounter;
@@ -80,7 +80,6 @@ public class PlayerController : GenericController {
 		// Jump not being held
 		if (Input.GetButtonUp("Jump")){
 			isJumping = false;
-			updateMana(-50);
 		}
 		// Acceleration
 		if (Input.GetButtonDown("Sprint")){
@@ -150,19 +149,22 @@ public class PlayerController : GenericController {
 		//END: sprite logic
 	}
 
-	public void updateMana(int deltaMana){
-		//if familiar disabled and deltamana<0, break
-		mana += deltaMana;
-		if(mana<0){
-			mana=0;
-			//disable familiar
+	public bool updateMana(float deltaMana){
+		//if familiar disabled and deltamana < 0, break
+		float tempMana = this.mana + deltaMana;
+		if(tempMana >= 0){ //if action is possible with our current mana
+			this.mana = tempMana; //apply changes
+			return true; //return that it was possible
 		}
-		//if(familiar disabled and mana==100){ 
+		else {
+			return false;
+		}
+		//if(familiar disabled and mana==100){
 		//enable familiar
 		//}
 	}
 
-	public void OnKillPlayer(){
+	protected override void onDeathAction(){ //for the player, we want the game over screen, not to destroy the object
 		SceneManager.LoadScene("GameOverScene");
 	}
 }
