@@ -165,4 +165,15 @@ public class PlayerController : GenericController {
 	public void OnKillPlayer(){
 		SceneManager.LoadScene("GameOverScene");
 	}
+	public void OnCollisionEnter2D (Collision2D c){
+		// Debug.Log(this.gameObject.name + " is colliding! " );
+		var collider = c.collider.GetComponent<GenericController>();
+		// Debug.Log(this.gameObject.name + "is colliding with " + c.gameObject.name);
+		if(collider != null){ //if the collider exist
+			this.health -= collider.damage; //subtract health from the collider's damage value
+			if (this.health <= 0){
+				OnKillPlayer();
+			}
+		}
+	}
 }
