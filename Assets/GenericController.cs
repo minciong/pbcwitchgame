@@ -24,6 +24,10 @@ public class GenericController : MonoBehaviour {
 		}
   }
 
+	protected virtual void onDeathAction(){ //by default, destroy the GameObject
+		Object.Destroy(this.gameObject);
+	}
+
 	public void OnCollisionEnter2D (Collision2D c){
 		// Debug.Log(this.gameObject.name + " is colliding! " );
 		var collider = c.collider.GetComponent<GenericController>();
@@ -31,7 +35,7 @@ public class GenericController : MonoBehaviour {
 		if(collider != null){ //if the collider exist
 			this.health -= collider.damage; //subtract health from the collider's damage value
 			if (this.health <= 0){
-				Object.Destroy(this.gameObject);
+				onDeathAction();
 			}
 		}
 	}

@@ -18,15 +18,15 @@ public class CameraController : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		// if (Input.GetButtonDown("Sprint")){
-		// 	targetOrtho = zoomIn;
-		// 	cameraSpeed += sprintCameraSpeed;
-		// }
+		if (Input.GetButtonDown("Sprint")){
+			targetOrtho = zoomIn;
+			cameraSpeed += sprintCameraSpeed;
+		}
 
-		// else if (Input.GetButtonUp("Sprint")) {
-		// 	targetOrtho = zoomOut;
-		// 	cameraSpeed -= sprintCameraSpeed;
-		// }
+		else if (Input.GetButtonUp("Sprint")) {
+			targetOrtho = zoomOut;
+			cameraSpeed -= sprintCameraSpeed;
+		}
 
 
 		Vector3 finalPosition = followTarget.position + offset;
