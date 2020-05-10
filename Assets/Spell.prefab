@@ -94,8 +94,9 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  m_Color: {r: 0.007742955, g: 0.5471698, b: 0.07270253, a: 1}
+  m_Sprite: {fileID: 8790336399829936661, guid: 3d8a4e6f51b88d1438b99b19d9e6a764,
+    type: 3}
+  m_Color: {r: 0.27106202, g: 1, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -137,3 +138,4 @@ MonoBehaviour:
   rb: {fileID: 7576129063147276958}
   bulletgrowth: 10
   lifetime: 0.5
+  bulletSprites: []
