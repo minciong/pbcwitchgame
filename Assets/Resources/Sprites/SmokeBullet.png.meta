@@ -1,0 +1,264 @@
+fileFormatVersion: 2
+guid: 3d8a4e6f51b88d1438b99b19d9e6a764
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 8790336399829936661
+    second: SmokeBullet_0
+  - first:
+      213: -6669153917616490521
+    second: SmokeBullet_1
+  - first:
+      213: 471031769259177806
+    second: SmokeBullet_2
+  - first:
+      213: -4919806578779270305
+    second: SmokeBullet_3
+  - first:
+      213: -1867210959513074676
+    second: SmokeBullet_4
+  - first:
+      213: 3461908099271506690
+    second: SmokeBullet_5
+  - first:
+      213: 483616499918542777
+    second: SmokeBullet_6
+  - first:
+      213: -2683251171326188038
+    second: SmokeBullet_7
+  - first:
+      213: -3678690237648780576
+    second: SmokeBullet_8
+  - first:
+      213: 8126930055658301791
+    second: SmokeBullet_9
+  - first:
+      213: -4356375325090106206
+    second: SmokeBullet_10
+  - first:
+      213: 2416638357922034525
+    second: SmokeBullet_11
+  - first:
+      213: -6639360523899996590
+    second: SmokeBullet_12
+  - first:
+      213: 970041197064839479
+    second: SmokeBullet_13
+  - first:
+      213: -815670952454488490
+    second: SmokeBullet_14
+  - first:
+      213: -4011597081162063037
+    second: SmokeBullet_15
+  - first:
+      213: -8697602308193504783
+    second: SmokeBullet_16
+  - first:
+      213: -5046170859973863280
+    second: SmokeBullet_17
+  externalObjects: {}
+  serializedVersion: 10
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 200
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: SmokeBullet_0
+      rect:
+        serializedVersion: 2
+        x: 13
+        y: 15
+        width: 38
+        height: 34
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4f359d163e2e14fc9a7ed7589944bc6a
+      internalID: 8790336399829936661
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SmokeBullet_1
+      rect:
+        serializedVersion: 2
+        x: 70
+        y: 7
+        width: 54
+        height: 52
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 745e62d0af840bdca8cb897acebcb8b5
+      internalID: -6669153917616490521
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SmokeBullet_2
+      rect:
+        serializedVersion: 2
+        x: 130
+        y: 3
+        width: 62
+        height: 59
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7011db16252750e24b3ef1c40b59ec94
+      internalID: 471031769259177806
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SmokeBullet_3
+      rect:
+        serializedVersion: 2
+        x: 194
+        y: 2
+        width: 62
+        height: 59
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7a08270c91de0e5c292b7567dfac90b4
+      internalID: -4919806578779270305
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SmokeBullet_4
+      rect:
+        serializedVersion: 2
+        x: 257
+        y: 6
+        width: 61
+        height: 55
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b959492f17cfb6e13b5410648063e8c4
+      internalID: -1867210959513074676
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
