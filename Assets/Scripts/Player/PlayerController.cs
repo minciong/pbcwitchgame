@@ -29,6 +29,7 @@ public class PlayerController : GenericController {
 	protected Sprite standSprite;
 	protected Sprite jumpSprite;
 	protected Sprite duckSprite;
+	
 	// Use this for initialization
 	void Start () {
 		moveSprites = Resources.LoadAll<Sprite>("Sprites/mario_moving");
