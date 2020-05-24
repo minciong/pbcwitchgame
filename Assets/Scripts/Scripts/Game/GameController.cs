@@ -10,8 +10,10 @@ public class GameController : MonoBehaviour {
 	public Text mpText;
 	// Use this for initialization
 	void Start () {
-		Physics2D.IgnoreLayerCollision(10,10); //don't let the  player layer collide with itself
-		Physics2D.IgnoreLayerCollision(0, 8); //don't allow the familiar to collide with terrain
+		Physics2D.IgnoreLayerCollision(10,10); //don't let the  player layer collide with itself (includes spells and such)
+
+		Physics2D.IgnoreLayerCollision(11, 8); //don't allow the familiar to collide with terrain
+		Physics2D.IgnoreLayerCollision(11, 9); //don't allow the familiar to collide with enemies
 	}
 
 	// Update is called once per frame
