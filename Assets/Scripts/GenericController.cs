@@ -8,6 +8,15 @@ public class GenericController : MonoBehaviour {
 	public float health { get; set; } = 100;
 	public float damage { get; set; } = 10;
 
+	//https://answers.unity.com/questions/1134985/sprite-blinking-effect-when-player-hit.html
+	//Sprite blinking for our invicinbility frames
+	private float spriteBlinkingTimer = 0.0f;
+	private float spriteBlinkingMiniDuration = 0.1f;
+	private float spriteBlinkingTotalTimer = 0.0f;
+	private float spriteBlinkingTotalDuration = 1.0f;
+	private bool startBlinking = false;
+	private int oldLayer = -1;
+
 	protected float TerrainDistance (bool dir) { //direction to raycast, false for horizontal, true for vertical
     var mask = LayerMask.GetMask("Terrain"); //only check against Terrain layer
     Vector2 checkDirection = -Vector2.right; //check from horizontally
@@ -28,15 +37,54 @@ public class GenericController : MonoBehaviour {
 		Object.Destroy(this.gameObject);
 	}
 
+	protected virtual void onDamageAction(){
+		this.oldLayer = this.gameObject.layer;
+		this.gameObject.layer = 31;
+		this.startBlinking = true;
+	}
+
 	public void doDamage(float damageVal){ //by default, destroy the GameObject
-		this.health -= damageVal; //subtract health from the collider's damage value
-		if (this.health <= 0){
-			onDeathAction();
+		if (damageVal > 0){
+			onDamageAction();
+			this.health -= damageVal; //subtract health from the collider's damage value
+			if (this.health <= 0){
+				onDeathAction();
+			}
 		}
 	}
 
+	private void SpriteBlinkingEffect(){
+		spriteBlinkingTotalTimer += Time.deltaTime;
+		if (spriteBlinkingTotalTimer >= spriteBlinkingTotalDuration){
+				startBlinking = false;
+			 	spriteBlinkingTotalTimer = 0.0f;
+			 	this.gameObject.GetComponent<SpriteRenderer> ().enabled = true;
+			 	this.gameObject.layer = this.oldLayer; //re-enable collision
+			 	return;
+		}
+
+		spriteBlinkingTimer += Time.deltaTime;
+		if (spriteBlinkingTimer >= spriteBlinkingMiniDuration){
+		 spriteBlinkingTimer = 0.0f;
+		 if (this.gameObject.GetComponent<SpriteRenderer> ().enabled == true) {
+				 this.gameObject.GetComponent<SpriteRenderer> ().enabled = false;  //make changes
+		 }
+		 else {
+				 this.gameObject.GetComponent<SpriteRenderer> ().enabled = true;   //make changes
+		 }
+		}
+	}
+
+
+	public virtual void Update(){
+		if(startBlinking == true) {
+			SpriteBlinkingEffect();
+		}
+  }
+
 	public virtual void OnCollisionEnter2D (Collision2D c){
 		GenericController collider = c.collider.GetComponent<GenericController>();
-		this.doDamage(collider.damage);
+		if (collider != null)
+			this.doDamage(collider.damage);
 	}
 }

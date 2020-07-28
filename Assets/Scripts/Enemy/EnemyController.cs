@@ -14,8 +14,10 @@ public class EnemyController : GenericController {
 		this.damage = 1;
 	}
 
+	protected override void onDamageAction(){return;} //disable onDamageAction
+
 	// Update is called once per frame
-	void Update () {
+	public override void Update () {
 		transform.position = transform.position + direction * Time.deltaTime * movespeed;
 		if(TerrainDistance(false)<0.5f){
 			direction = -direction;

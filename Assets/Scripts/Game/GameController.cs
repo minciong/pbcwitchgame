@@ -14,6 +14,12 @@ public class GameController : MonoBehaviour {
 
 		Physics2D.IgnoreLayerCollision(11, 8); //don't allow the familiar to collide with terrain
 		Physics2D.IgnoreLayerCollision(11, 9); //don't allow the familiar to collide with enemies
+
+		//Create collision-void layer, only allow interaction with terrain in this layer
+		Physics2D.IgnoreLayerCollision(31, 31); //layer interaction
+		Physics2D.IgnoreLayerCollision(31, 10); //player
+		Physics2D.IgnoreLayerCollision(31, 11); //familiar
+		Physics2D.IgnoreLayerCollision(31, 9); //familiar
 	}
 
 	// Update is called once per frame
