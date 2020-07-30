@@ -93,11 +93,18 @@ public class PlayerController : GenericController {
 			sprintVal = 1;
 			xMaxVel /= sprintMult;
 		}
-		if ((Input.GetButton("Left"))&&(xVelocity > -xMaxVel))
-		    xVelocity = xVelocity - accel * Time.deltaTime;
+		if ((Input.GetButton("Left"))&&(xVelocity > -xMaxVel)){
+			if (Input.GetButton("Right"))
+				xVelocity=0;				
+			else
+		    	xVelocity = xVelocity - accel * Time.deltaTime;
+			}
 
-		else if ((Input.GetButton("Right"))&&(xVelocity < xMaxVel))
-		    xVelocity = xVelocity + accel * Time.deltaTime;
+		else if ((Input.GetButton("Right"))&&(xVelocity < xMaxVel)){
+			if (Input.GetButton("Left"))
+				xVelocity=0;
+			else
+		    	xVelocity = xVelocity + accel * Time.deltaTime;}
 		else
 		{
 		    if (xVelocity > decel * Time.deltaTime)
