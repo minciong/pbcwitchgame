@@ -17,6 +17,8 @@ public class GenericController : MonoBehaviour {
 	private bool startBlinking = false;
 	private int oldLayer = -1;
 	private Color transparent = new Color(1f,1f,1f,.5f);
+	// private Color transparent = new Color(0.93f,0.55f,0.1f,.5f);
+	// private Color transparent = new Color(0.27f,1f,0f,.5f);
 	private Color opaque = new Color(1f,1f,1f,1f);
 	protected float TerrainDistance (bool dir) { //direction to raycast, false for horizontal, true for vertical
     var mask = LayerMask.GetMask("Terrain"); //only check against Terrain layer
