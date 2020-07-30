@@ -25,7 +25,7 @@ public class GenericController : MonoBehaviour {
 	// private Color transparent = new Color(0.93f,0.55f,0.1f,.5f);//amber
 	// private Color transparent = new Color(0.27f,1f,0f,.5f);//green
 	private Color opaque = new Color(1f,1f,1f,1f);
-	public float knockStrength = 0.1f;
+	public float knockStrength = 1f;
 	public Quaternion leftFacing = new Quaternion(0,180,0,0);
 	protected float TerrainDistance (bool dir) { //direction to raycast, false for horizontal, true for vertical
     var mask = LayerMask.GetMask("Terrain"); //only check against Terrain layer
@@ -93,11 +93,11 @@ public class GenericController : MonoBehaviour {
 			this.gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
 			return;
 		}
-		Debug.Log(this.gameObject.GetComponent<Rigidbody2D>().transform.rotation.y);
+		
 		if(this.gameObject.GetComponent<Rigidbody2D>().transform.rotation.y==0)
-		this.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(-2,1)*knockStrength, ForceMode2D.Impulse);
+		this.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(-2,1.5f)*knockStrength, ForceMode2D.Impulse);
 		else
-		this.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(2,1)*knockStrength, ForceMode2D.Impulse);
+		this.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(2,1.5f)*knockStrength, ForceMode2D.Impulse);
 	}
 
 
