@@ -15,12 +15,18 @@ public class GenericController : MonoBehaviour {
 	private float spriteBlinkingTotalTimer = 0.0f;
 	private float spriteBlinkingTotalDuration = 1.0f;
 	private bool startBlinking = false;
+
+	private float knockTimer = 0.0f;
+	private float knockDuration = 0.3f;
+
+	private bool startKnock = false;
 	private int oldLayer = -1;
 	private Color transparent = new Color(1f,1f,1f,.5f);
-	// private Color transparent = new Color(0.93f,0.55f,0.1f,.5f);
-	// private Color transparent = new Color(0.27f,1f,0f,.5f);
+	// private Color transparent = new Color(0.93f,0.55f,0.1f,.5f);//amber
+	// private Color transparent = new Color(0.27f,1f,0f,.5f);//green
 	private Color opaque = new Color(1f,1f,1f,1f);
-	public int knockStrength = 2;
+	public float knockStrength = 0.1f;
+	public Quaternion leftFacing = new Quaternion(0,180,0,0);
 	protected float TerrainDistance (bool dir) { //direction to raycast, false for horizontal, true for vertical
     var mask = LayerMask.GetMask("Terrain"); //only check against Terrain layer
     Vector2 checkDirection = -Vector2.right; //check from horizontally
@@ -45,6 +51,7 @@ public class GenericController : MonoBehaviour {
 		this.oldLayer = this.gameObject.layer;
 		this.gameObject.layer = 31;
 		this.startBlinking = true;
+		this.startKnock = true;
 	}
 
 	public void doDamage(float damageVal){ //by default, destroy the GameObject
@@ -78,11 +85,28 @@ public class GenericController : MonoBehaviour {
 		 }
 		}
 	}
+	private void Knockback(){
+		knockTimer+=Time.deltaTime;
+		if(knockTimer>=knockDuration){
+			startKnock=false;
+			knockTimer=0.0f;
+			this.gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+			return;
+		}
+		Debug.Log(this.gameObject.GetComponent<Rigidbody2D>().transform.rotation.y);
+		if(this.gameObject.GetComponent<Rigidbody2D>().transform.rotation.y==0)
+		this.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(-2,1)*knockStrength, ForceMode2D.Impulse);
+		else
+		this.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(2,1)*knockStrength, ForceMode2D.Impulse);
+	}
 
 
 	public virtual void Update(){
 		if(startBlinking == true) {
 			SpriteBlinkingEffect();
+		}
+		if(startKnock){
+			Knockback();
 		}
   }
 
