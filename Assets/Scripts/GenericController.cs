@@ -16,7 +16,8 @@ public class GenericController : MonoBehaviour {
 	private float spriteBlinkingTotalDuration = 1.0f;
 	private bool startBlinking = false;
 	private int oldLayer = -1;
-
+	private Color transparent = new Color(1f,1f,1f,.5f);
+	private Color opaque = new Color(1f,1f,1f,1f);
 	protected float TerrainDistance (bool dir) { //direction to raycast, false for horizontal, true for vertical
     var mask = LayerMask.GetMask("Terrain"); //only check against Terrain layer
     Vector2 checkDirection = -Vector2.right; //check from horizontally
@@ -58,7 +59,7 @@ public class GenericController : MonoBehaviour {
 		if (spriteBlinkingTotalTimer >= spriteBlinkingTotalDuration){
 				startBlinking = false;
 			 	spriteBlinkingTotalTimer = 0.0f;
-			 	this.gameObject.GetComponent<SpriteRenderer> ().enabled = true;
+			 	this.gameObject.GetComponent<SpriteRenderer> ().color = opaque;
 			 	this.gameObject.layer = this.oldLayer; //re-enable collision
 			 	return;
 		}
@@ -66,11 +67,11 @@ public class GenericController : MonoBehaviour {
 		spriteBlinkingTimer += Time.deltaTime;
 		if (spriteBlinkingTimer >= spriteBlinkingMiniDuration){
 		 spriteBlinkingTimer = 0.0f;
-		 if (this.gameObject.GetComponent<SpriteRenderer> ().enabled == true) {
-				 this.gameObject.GetComponent<SpriteRenderer> ().enabled = false;  //make changes
+		 if (this.gameObject.GetComponent<SpriteRenderer> ().color == opaque) {
+				 this.gameObject.GetComponent<SpriteRenderer> ().color = transparent;  //make changes
 		 }
 		 else {
-				 this.gameObject.GetComponent<SpriteRenderer> ().enabled = true;   //make changes
+				 this.gameObject.GetComponent<SpriteRenderer> ().color = opaque;   //make changes
 		 }
 		}
 	}
