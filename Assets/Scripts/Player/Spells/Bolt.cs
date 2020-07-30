@@ -44,7 +44,7 @@ public class Bolt : GenericController{
   }
 
   // Update is called once per frame
-  void Update(){
+  public override void Update(){
 
   // boltPrefab.Sprite = bulletSprites;
   animationTimer += Time.deltaTime;
@@ -55,6 +55,8 @@ public class Bolt : GenericController{
  										bulletgrowth* Time.deltaTime);
 
 	}
+
+	protected override void onDamageAction(){return;} //disable onDamageAction
 
 	public void OnTriggerEnter2D(Collider2D otherCollider){
 		//Remove a target from the goal

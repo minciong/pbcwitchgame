@@ -29,7 +29,7 @@ public class PlayerController : GenericController {
 	protected Sprite standSprite;
 	protected Sprite jumpSprite;
 	protected Sprite duckSprite;
-	
+
 	// Use this for initialization
 	void Start () {
 		moveSprites = Resources.LoadAll<Sprite>("Sprites/mario_moving");
@@ -57,7 +57,8 @@ public class PlayerController : GenericController {
 	}
 
 	// Update is called once per frame
-	void Update () {
+	public override void Update () {
+		base.Update();
 		var isMoving = false;
 		var isDucking = false;
 
@@ -106,7 +107,9 @@ public class PlayerController : GenericController {
 		    else
 		        xVelocity = 0;
 		}
-
+		if ((Input.GetButton("Left"))&&(Input.GetButton("Right")))
+			xVelocity=0;
+		
 		transform.position = transform.position + Vector3.right * xVelocity * Time.deltaTime;
 
 
