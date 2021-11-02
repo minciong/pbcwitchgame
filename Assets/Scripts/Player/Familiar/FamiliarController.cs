@@ -35,9 +35,9 @@ public class FamiliarController : MonoBehaviour
     private float spriteBlinkingTotalTimer = 0.0f;
     private float spriteBlinkingTotalDuration = 1.0f;
     private bool startBlinking = false;
-    private Color transparent = new Color(1f,1f,1f,.5f);
+    // private Color transparent = new Color(1f,1f,1f,.5f);
     // private Color transparent = new Color(0.93f,0.55f,0.1f,.5f);//amber
-    // private Color transparent = new Color(0.27f,1f,0f,.5f);//green
+    private Color transparent = new Color(0.27f,1f,0f,.5f);//green
     private Color opaque = new Color(1f,1f,1f,1f);
     // private int oldLayer = -1;
     private float familiarDamage = 1;
@@ -70,6 +70,8 @@ public class FamiliarController : MonoBehaviour
     if (collision.gameObject.tag == "Enemies"){ //Enemies with manaburn
       // Debug.Log(collision.GetComponent<BoxCollider2D>().GetComponent<GenericController>().manaDamage);
       playerScript.updateMana(-1*collision.GetComponent<BoxCollider2D>().GetComponent<GenericController>().manaDamage);
+      if(collision.GetComponent<BoxCollider2D>().GetComponent<GenericController>().manaDamage>0)
+      {this.startBlinking = true;}
       Physics2D.IgnoreCollision(collision.GetComponent<CapsuleCollider2D>(), fCollider);
       if(playerScript.rechargingMana){
         playerScript.doDamage(familiarDamage);
