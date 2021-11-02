@@ -7,6 +7,7 @@ public class GenericController : MonoBehaviour {
 
 	public float health { get; set; } = 100;
 	public float damage { get; set; } = 10;
+	public float manaDamage { get; set; } = 10;
 
 	//https://answers.unity.com/questions/1134985/sprite-blinking-effect-when-player-hit.html
 	//Sprite blinking for our invicinbility frames
@@ -54,7 +55,7 @@ public class GenericController : MonoBehaviour {
 		this.startKnock = true;
 	}
 
-	public void doDamage(float damageVal){ //by default, destroy the GameObject
+	public virtual void doDamage(float damageVal){ //by default, destroy the GameObject
 		if (damageVal > 0){
 			onDamageAction();
 			this.health -= damageVal; //subtract health from the collider's damage value
