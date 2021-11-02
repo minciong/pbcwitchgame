@@ -55,7 +55,7 @@ public class GenericController : MonoBehaviour {
 		this.startKnock = true;
 	}
 
-	public void doDamage(float damageVal){ //by default, destroy the GameObject
+	public virtual void doDamage(float damageVal){ //by default, destroy the GameObject
 		if (damageVal > 0){
 			onDamageAction();
 			this.health -= damageVal; //subtract health from the collider's damage value

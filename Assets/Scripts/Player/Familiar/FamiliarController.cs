@@ -23,11 +23,24 @@ public class FamiliarController : MonoBehaviour
     public bool teleport_cd = false;
     public bool rotate = false;
     public int teleport_cd_duration = 0;
-    protected bool teleportOverride = false; //prevents teleports if true
-    protected CapsuleCollider2D fCollider; //to reference the placed collider
+    public bool teleportOverride = false; //prevents teleports if true
+    public CapsuleCollider2D fCollider; //to reference the placed collider
     public Object prefab_ShieldRenderer;
     protected GameObject shieldRenderer;
 
+    //https://answers.unity.com/questions/1134985/sprite-blinking-effect-when-player-hit.html
+    //Sprite blinking for our invicinbility frames
+    private float spriteBlinkingTimer = 0.0f;
+    private float spriteBlinkingMiniDuration = 0.1f;
+    private float spriteBlinkingTotalTimer = 0.0f;
+    private float spriteBlinkingTotalDuration = 1.0f;
+    private bool startBlinking = false;
+    private Color transparent = new Color(1f,1f,1f,.5f);
+    // private Color transparent = new Color(0.93f,0.55f,0.1f,.5f);//amber
+    // private Color transparent = new Color(0.27f,1f,0f,.5f);//green
+    private Color opaque = new Color(1f,1f,1f,1f);
+    // private int oldLayer = -1;
+    private float familiarDamage = 1;
     // private Vector2 _centre;
     public float _angle;
 
@@ -43,7 +56,7 @@ public class FamiliarController : MonoBehaviour
 
     }
 
-   void OnCollisionEnter2D(Collision2D collision){
+   public void OnCollisionEnter2D(Collision2D collision){
     if (collision.gameObject.tag == "Terrain"){ //when we collide with the tilemap, no teleports
       teleportOverride = true;
     }
@@ -51,13 +64,20 @@ public class FamiliarController : MonoBehaviour
     if (collision.gameObject.tag == "Player"){ //ignore player collision entirely
       Physics2D.IgnoreCollision(collision.collider, fCollider);
     }
-    if (collision.gameObject.tag == "Enemies"){ //Enemies with manaburn
-      Debug.Log("test");
-
-      // playerScript.updateMana(collision.collider.GetComponent<GenericController>().manaDamage);
-    }
+    
    }
+   public void OnTriggerEnter2D(Collider2D collision){
+    if (collision.gameObject.tag == "Enemies"){ //Enemies with manaburn
+      // Debug.Log(collision.GetComponent<BoxCollider2D>().GetComponent<GenericController>().manaDamage);
+      playerScript.updateMana(-1*collision.GetComponent<BoxCollider2D>().GetComponent<GenericController>().manaDamage);
+      Physics2D.IgnoreCollision(collision.GetComponent<CapsuleCollider2D>(), fCollider);
+      if(playerScript.rechargingMana){
+        playerScript.doDamage(familiarDamage);
+      }
 
+    }
+
+   }
    void OnCollisionExit2D(Collision2D collision){
      if (collision.gameObject.tag == "Terrain"){ //stopped colliding with the tilemap, teleport allowed
        teleportOverride = false;
@@ -65,9 +85,34 @@ public class FamiliarController : MonoBehaviour
 
    }
 
+   private void SpriteBlinkingEffect(){
+    spriteBlinkingTotalTimer += Time.deltaTime;
+    if (spriteBlinkingTotalTimer >= spriteBlinkingTotalDuration){
+        startBlinking = false;
+        spriteBlinkingTotalTimer = 0.0f;
+        this.gameObject.GetComponent<SpriteRenderer> ().color = this.opaque;
+        // this.gameObject.layer = this.oldLayer; //re-enable collision
+        return;
+    }
+
+    spriteBlinkingTimer += Time.deltaTime;
+    if (spriteBlinkingTimer >= spriteBlinkingMiniDuration){
+     spriteBlinkingTimer = 0.0f;
+     if (this.gameObject.GetComponent<SpriteRenderer> ().color == this.opaque) {
+         this.gameObject.GetComponent<SpriteRenderer> ().color = this.transparent;  //make changes
+     }
+     else {
+         this.gameObject.GetComponent<SpriteRenderer> ().color = this.opaque;   //make changes
+     }
+    }
+  }
+
     // Update is called once per frame
     void Update()
     {
+      if(startBlinking == true) {
+      SpriteBlinkingEffect();
+    }
       //Shield control, affects TrailRenderer
       if (Input.GetButtonDown("DrawShield") && playerScript.updateMana(shieldMana)){
         shieldRenderer = (GameObject)Instantiate(prefab_ShieldRenderer, this.transform);
@@ -78,7 +123,7 @@ public class FamiliarController : MonoBehaviour
         shieldRenderer.transform.parent = null;
       }
 
-      if (Input.GetButton("familiarSwap"))
+      if (Input.GetButtonUp("familiarSwap"))
         rotate = !rotate;
 
       Camera camera = GetComponent<Camera>();

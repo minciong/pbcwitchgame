@@ -30,7 +30,7 @@ public class PlayerController : GenericController {
 	protected Sprite jumpSprite;
 	protected Sprite duckSprite;
 
-	protected bool rechargingMana;
+	public bool rechargingMana;
 
 	// Use this for initialization
 	void Start () {

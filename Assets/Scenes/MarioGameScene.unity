@@ -346,6 +346,7 @@ GameObject:
   - component: {fileID: 55486085}
   - component: {fileID: 55486087}
   - component: {fileID: 55486088}
+  - component: {fileID: 55486089}
   m_Layer: 9
   m_Name: Goomba
   m_TagString: Enemies
@@ -476,7 +477,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac8943d6a25be0f4a8863a3baf3cb26b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  knockStrength: 1
+  leftFacing: {x: 0, y: 180, z: 0, w: 0}
 --- !u!70 &55486088
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 55486082}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 1, y: 1}
+  m_Direction: 0
+--- !u!70 &55486089
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2976,6 +2995,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df8d4636dcc427b4a8b1cd372e07ba7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  knockStrength: 1
+  leftFacing: {x: 0, y: 180, z: 0, w: 0}
 --- !u!70 &1287838259
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -3427,6 +3448,8 @@ MonoBehaviour:
   teleport_cd: 0
   rotate: 0
   teleport_cd_duration: 1
+  teleportOverride: 0
+  fCollider: {fileID: 0}
   prefab_ShieldRenderer: {fileID: 2952861026592842111, guid: d346a4820c9e77a63bbf7ed9644d4da1,
     type: 3}
   _angle: 0
