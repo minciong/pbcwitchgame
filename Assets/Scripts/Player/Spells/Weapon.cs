@@ -8,7 +8,7 @@ public class Weapon : MonoBehaviour
     protected GameObject witchObject; // Witch Object
     protected PlayerController playerScript; //script within the witch object
 
-    protected float boltMana = -1f;
+    protected float boltMana = -5f;
 
     public Transform Castpoint;
     public GameObject boltPrefab;

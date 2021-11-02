@@ -51,12 +51,18 @@ public class FamiliarController : MonoBehaviour
     if (collision.gameObject.tag == "Player"){ //ignore player collision entirely
       Physics2D.IgnoreCollision(collision.collider, fCollider);
     }
+    if (collision.gameObject.tag == "Enemies"){ //Enemies with manaburn
+      Debug.Log("test");
+
+      // playerScript.updateMana(collision.collider.GetComponent<GenericController>().manaDamage);
+    }
    }
 
    void OnCollisionExit2D(Collision2D collision){
      if (collision.gameObject.tag == "Terrain"){ //stopped colliding with the tilemap, teleport allowed
        teleportOverride = false;
      }
+
    }
 
     // Update is called once per frame

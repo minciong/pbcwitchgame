@@ -12,6 +12,7 @@ public class EnemyController : GenericController {
 		//change inherited values
 		this.health = 10;
 		this.damage = 1;
+		this.manaDamage = 5;
 	}
 
 	protected override void onDamageAction(){return;} //disable onDamageAction

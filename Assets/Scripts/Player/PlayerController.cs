@@ -21,7 +21,7 @@ public class PlayerController : GenericController {
 	public float maxHealth { get; set; } = 5;
 	public float mana { get; set; } = 100;
 	public float maxMana { get; set; } = 100;
-	protected float manaRegen = 0.1f;
+	protected float manaRegen = 0.2f;
 
 	protected bool isJumping;
 	protected float jumpTimeCounter;
@@ -29,6 +29,8 @@ public class PlayerController : GenericController {
 	protected Sprite standSprite;
 	protected Sprite jumpSprite;
 	protected Sprite duckSprite;
+
+	protected bool rechargingMana;
 
 	// Use this for initialization
 	void Start () {
@@ -44,6 +46,7 @@ public class PlayerController : GenericController {
 		this.health =  5;
 		this.maxHealth = 5;
 		this.damage = 0;
+		this.manaDamage = 0;
 	}
 
 	// FixedUpdate works independent of frame rate, for interaction with the physics system
@@ -157,10 +160,15 @@ public class PlayerController : GenericController {
 		//if familiar disabled and deltamana < 0, break
 		float tempMana = this.mana + deltaMana;
 		if(tempMana >= 0){ //if action is possible with our current mana
+			if(mana>=maxMana && rechargingMana)//enable spells once mana is no longer on cooldown
+				{rechargingMana=false;}
+			if(deltaMana<0 && rechargingMana)//cannot cast spells if mana is recharging
+				{return false;}
 			this.mana = tempMana; //apply changes
 			return true; //return that it was possible
 		}
 		else {
+			rechargingMana=true;
 			return false;
 		}
 		//if(familiar disabled and mana==100){
